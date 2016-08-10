@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -tke */
+/* Ofront+ 0.9 -tke */
 #include "SYSTEM.h"
 
 struct Heap__1 {

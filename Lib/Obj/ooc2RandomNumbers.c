@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -xtspkae */
+/* Ofront+ 0.9 -xtspkae */
 #include "SYSTEM.h"
 
 
@@ -54,7 +54,7 @@ INTEGER ooc2RandomNumbers_RND (INTEGER range)
 REAL ooc2RandomNumbers_Random (void)
 {
 	ooc2RandomNumbers_NextRND();
-	return (ooc2RandomNumbers_z - 1) * 4.656612873077393E-10;
+	return (ooc2RandomNumbers_z - 1) *   4.6566129e-010;
 }
 
 /*----------------------------------------------------------------------------*/

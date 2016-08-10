@@ -1225,13 +1225,13 @@ void Texts_WriteReal (Texts_Writer *W, LONGINT *W__typ, REAL x, SHORTINT n)
 			x = Reals_Ten(-e) * x;
 		}
 		if (x >= (REAL)10) {
-			x = 0.1000000014901161 * x;
+			x =   1.0000000e-001 * x;
 			e += 1;
 		}
 		x0 = Reals_Ten(n - 1);
-		x = x0 * x + 0.5;
+		x = x0 * x +   5.0000000e-001;
 		if (x >= (REAL)10 * x0) {
-			x = x * 0.1000000014901161;
+			x = x *   1.0000000e-001;
 			e += 1;
 		}
 		Reals_Convert(x, n, (void*)d, 9);
@@ -1320,7 +1320,7 @@ void Texts_WriteRealFix (Texts_Writer *W, LONGINT *W__typ, REAL x, SHORTINT n, S
 			x = Reals_Ten(-e) * x;
 		}
 		if (x >= (REAL)10) {
-			x = 0.1000000014901161 * x;
+			x =   1.0000000e-001 * x;
 			e += 1;
 		}
 		if (k + e >= 8) {
@@ -1330,7 +1330,7 @@ void Texts_WriteRealFix (Texts_Writer *W, LONGINT *W__typ, REAL x, SHORTINT n, S
 			x = (REAL)0;
 		}
 		x0 = Reals_Ten(k + e);
-		x = x0 * x + 0.5;
+		x = x0 * x +   5.0000000e-001;
 		if (x >= (REAL)10 * x0) {
 			e += 1;
 		}
@@ -1410,13 +1410,13 @@ void Texts_WriteLongReal (Texts_Writer *W, LONGINT *W__typ, LONGREAL x, SHORTINT
 			x = Reals_TenL(-e) * x;
 		}
 		if (x >= (LONGREAL)10) {
-			x = 0.1 * x;
+			x =   1.00000000000000e-001 * x;
 			e += 1;
 		}
 		x0 = Reals_TenL(n - 1);
-		x = x0 * x + 0.5;
+		x = x0 * x +   5.00000000000000e-001;
 		if (x >= (LONGREAL)10 * x0) {
-			x = 0.1 * x;
+			x =   1.00000000000000e-001 * x;
 			e += 1;
 		}
 		Reals_ConvertL(x, n, (void*)d, 16);

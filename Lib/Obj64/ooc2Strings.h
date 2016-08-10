@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -xtspkae */
+/* Ofront+ 0.9 -xtspkae */
 
 #ifndef ooc2Strings__h
 #define ooc2Strings__h

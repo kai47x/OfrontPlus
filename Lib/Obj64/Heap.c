@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -tke */
+/* Ofront+ 0.9 -tke */
 #include "SYSTEM.h"
 
 struct Heap__1 {
@@ -325,7 +325,7 @@ SYSTEM_PTR Heap_NEWBLK (INTEGER size)
 	LONGINT blksz, tag;
 	SYSTEM_PTR new;
 	Heap_Lock();
-	blksz = __ASHL(__ASHR(size + 63, 5, INTEGER), 5, INTEGER);
+	blksz = __ASHL(__ASHR((LONGINT)size + 63, 5, LONGINT), 5, LONGINT);
 	new = Heap_NEWREC((LONGINT)&blksz);
 	tag = ((LONGINT)new + blksz) - 24;
 	__PUT(tag - 8, 0, LONGINT);

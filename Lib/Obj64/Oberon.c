@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -xtspkae */
+/* Ofront+ 0.9 -xtspkae */
 #include "SYSTEM.h"
 #include "Args.h"
 #include "Console.h"
@@ -90,8 +90,8 @@ static void EnumPtrs(void (*P)(void*))
 {
 	P(Oberon_Log);
 	P(Oberon_Par);
-	__ENUMR(&Oberon_R, Texts_Reader__typ, 72, 1, P);
-	__ENUMR(&Oberon_W, Texts_Writer__typ, 56, 1, P);
+	__ENUMR(&Oberon_R, Texts_Reader__typ, 80, 1, P);
+	__ENUMR(&Oberon_W, Texts_Writer__typ, 64, 1, P);
 }
 
 __TDESC(Oberon_ParRec__desc, 1, 1) = {__TDFLDS("ParRec", 16), {0, -16}};
