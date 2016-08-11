@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspka */
+/* Ofront+ 0.9 -tke */
 
 #ifndef Heap__h
 #define Heap__h
