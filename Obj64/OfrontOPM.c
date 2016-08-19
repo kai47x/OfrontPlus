@@ -502,6 +502,7 @@ static void OfrontOPM_GetProperties (void)
 {
 	Texts_Text T = NIL;
 	Texts_Scanner S;
+	INTEGER base;
 	OfrontOPM_ByteSize = 1;
 	OfrontOPM_CharSize = 1;
 	OfrontOPM_BoolSize = 1;
@@ -575,7 +576,8 @@ static void OfrontOPM_GetProperties (void)
 		OfrontOPM_MaxInt = 2147483647;
 	}
 	if (OfrontOPM_LIntSize == 8) {
-		OfrontOPM_MinLInt = __LSHL((LONGINT)1, 63, LONGINT);
+		base = 63;
+		OfrontOPM_MinLInt = __LSH((LONGINT)1, base, LONGINT);
 		OfrontOPM_MaxLInt = -(OfrontOPM_MinLInt + 1);
 	}
 	OfrontOPM_MaxSet = __ASHL(OfrontOPM_SetSize, 3, INTEGER) - 1;
