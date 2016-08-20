@@ -184,7 +184,7 @@ void OfrontOPM_OpenPar (void)
 	if (Args_argc == 1) {
 		OfrontOPM_stop = 1;
 		Console_Ln();
-		Console_String((CHAR*)"OfrontPlus - Oberon-2 to C Translator v0.9", 43);
+		Console_String((CHAR*)"OfrontPlus - Oberon family of languages to C Translator v0.9", 61);
 		Console_Ln();
 		Console_String((CHAR*)"Copyright (c) Software Templ OEG, 1995-2007 & VEDAsoft Oberon Club, 2013-2016", 78);
 		Console_Ln();
@@ -195,8 +195,9 @@ void OfrontOPM_OpenPar (void)
 		Console_Ln();
 		Console_String((CHAR*)"  options = [\"-\" {option} ].", 29);
 		Console_Ln();
-		Console_String((CHAR*)"  option  = \"m\" | \"s\" | \"e\" | \"i\" | \"l\" | \"k\" | \"r\" | \"x\" | \"a\" | \"p\" | \"t\".", 77);
+		Console_String((CHAR*)"  option  = \"m\" | \"s\" | \"e\" | \"i\" | \"l\" | \"k\" | \"r\" | \"x\" | \"a\" | \"p\" | \"t\"", 76);
 		Console_Ln();
+		Console_String((CHAR*)"            \"1\" Oberon | \"2\" Oberon-2 | \"c\" Component Pascal | \"7\" Oberon-07", 77);
 		Console_Ln();
 	} else {
 		OfrontOPM_GetProperties();
