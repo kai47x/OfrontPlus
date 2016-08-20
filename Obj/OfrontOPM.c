@@ -154,6 +154,18 @@ static void OfrontOPM_ScanOptions (CHAR *s, INTEGER s__len, SET *opt)
 			case 'l': 
 				*opt = *opt ^ 0x0800;
 				break;
+			case '1': 
+				*opt = (((*opt | 0x1000) & ~0x2000) & ~0x4000) & ~0x8000;
+				break;
+			case '2': 
+				*opt = (((*opt | 0x2000) & ~0x1000) & ~0x4000) & ~0x8000;
+				break;
+			case 'c': 
+				*opt = (((*opt | 0x4000) & ~0x1000) & ~0x2000) & ~0x8000;
+				break;
+			case '7': 
+				*opt = (((*opt | 0x8000) & ~0x1000) & ~0x2000) & ~0x4000;
+				break;
 			default: 
 				OfrontOPM_LogWStr((CHAR*)"  warning: option ", 19);
 				OfrontOPM_LogW('-');

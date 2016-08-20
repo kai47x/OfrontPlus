@@ -1114,7 +1114,7 @@ static void OfrontOPP_ProcedureDeclaration (OfrontOPT_Node *x)
 		}
 		OfrontOPS_Get(&OfrontOPP_sym);
 	}
-	if (OfrontOPP_sym == 30) {
+	if ((OfrontOPP_sym == 30 && !__IN(12, OfrontOPM_opt)) && !__IN(15, OfrontOPM_opt)) {
 		TProcDecl__23();
 	} else if (OfrontOPP_sym == 38) {
 		OfrontOPT_Find(&fwd);

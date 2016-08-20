@@ -1287,6 +1287,18 @@ static void OfrontOPC_GenHeaderMsg (void)
 					break;
 				case 11: 
 					break;
+				case 12: 
+					OfrontOPM_Write('1');
+					break;
+				case 13: 
+					OfrontOPM_Write('2');
+					break;
+				case 14: 
+					OfrontOPM_Write('c');
+					break;
+				case 15: 
+					OfrontOPM_Write('7');
+					break;
 				default: __CASECHK;
 			}
 		}
