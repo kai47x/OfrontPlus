@@ -2264,6 +2264,9 @@ void OfrontOPB_StPar1 (OfrontOPT_Node *par0, OfrontOPT_Node x, SHORTINT fctno)
 			if (((x->class == 8 || x->class == 9) || __IN(f, 0x1401)) || x->typ->comp == 3) {
 				OfrontOPB_err(126);
 			}
+			if (x->class != 7 && x->typ->size < p->typ->size) {
+				OfrontOPB_err(-308);
+			}
 			t = OfrontOPT_NewNode(11);
 			t->subcl = 29;
 			t->left = x;
