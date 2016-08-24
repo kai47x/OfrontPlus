@@ -6,6 +6,9 @@
 #include "SYSTEM.h"
 
 typedef
+	CHAR (*Platform_ADR)[1];
+
+typedef
 	CHAR (*Platform_ArgPtr)[1024];
 
 typedef
@@ -22,9 +25,6 @@ typedef
 
 typedef
 	void (*Platform_HaltProcedure)(INTEGER);
-
-typedef
-	CHAR (*Platform_MemAdr)[1];
 
 typedef
 	void (*Platform_SignalHandler)(INTEGER);
@@ -60,11 +60,11 @@ import BOOLEAN Platform_Inaccessible (INTEGER e);
 import void Platform_MTimeAsClock (Platform_FileIdentity i, INTEGER *t, INTEGER *d);
 import INTEGER Platform_New (CHAR *n, INTEGER n__len, Platform_FileHandle *h);
 import BOOLEAN Platform_NoSuchDirectory (INTEGER e);
-import Platform_MemAdr Platform_OSAllocate (INTEGER size);
-import void Platform_OSFree (Platform_MemAdr address);
+import Platform_ADR Platform_OSAllocate (INTEGER size);
+import void Platform_OSFree (Platform_ADR address);
 import INTEGER Platform_OldRO (CHAR *n, INTEGER n__len, Platform_FileHandle *h);
 import INTEGER Platform_OldRW (CHAR *n, INTEGER n__len, Platform_FileHandle *h);
-import INTEGER Platform_Read (Platform_FileHandle h, Platform_MemAdr p, INTEGER l, INTEGER *n);
+import INTEGER Platform_Read (Platform_FileHandle h, Platform_ADR p, INTEGER l, INTEGER *n);
 import INTEGER Platform_ReadBuf (Platform_FileHandle h, BYTE *b, INTEGER b__len, INTEGER *n);
 import INTEGER Platform_Rename (CHAR *o, INTEGER o__len, CHAR *n, INTEGER n__len);
 import BOOLEAN Platform_SameFile (Platform_FileIdentity i1, Platform_FileIdentity i2);
@@ -81,7 +81,7 @@ import BOOLEAN Platform_TimedOut (INTEGER e);
 import BOOLEAN Platform_TooManyFiles (INTEGER e);
 import INTEGER Platform_Truncate (Platform_FileHandle h, LONGINT limit);
 import INTEGER Platform_Unlink (CHAR *n, INTEGER n__len);
-import INTEGER Platform_Write (Platform_FileHandle h, Platform_MemAdr p, INTEGER l);
+import INTEGER Platform_Write (Platform_FileHandle h, Platform_ADR p, INTEGER l);
 import BOOLEAN Platform_getEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER val__len);
 import void *Platform__init(void);
 

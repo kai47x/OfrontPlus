@@ -100,12 +100,18 @@ export void Heap_Unlock (void);
 
 extern void *Heap__init();
 extern void *SYSTEM_MainStackFrame;
-extern void *Platform_OSAllocate(INTEGER size);
+#if defined __linux__ || defined __unix__
+#  include <stdlib.h>
+#  define OSAllocate(size) malloc((size_t)(size))
+#else
+#  include "_windows.h"
+#  define OSAllocate(size) HeapAlloc(GetProcessHeap(), 0, (size_t)(size))
+#endif
 #define Heap_FetchAddress(pointer)	(LONGINT)(SYSTEM_ADR)(*((void**)((SYSTEM_ADR)pointer)))
 #define Heap_Halt(code)	__HALT(code)
 #define Heap_HeapModuleInit()	Heap__init()
 #define Heap_MainStackFrame()	((LONGINT)(SYSTEM_ADR)SYSTEM_MainStackFrame)
-#define Heap_OSAllocate(size)	((LONGINT)(SYSTEM_ADR)Platform_OSAllocate((SYSTEM_ADR)(size)))
+#define Heap_OSAllocate(size)	((LONGINT)(SYSTEM_ADR)OSAllocate(size))
 
 /*============================================================================*/
 

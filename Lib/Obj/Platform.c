@@ -2,6 +2,9 @@
 #include "SYSTEM.h"
 
 typedef
+	CHAR (*Platform_ADR)[1];
+
+typedef
 	CHAR (*Platform_ArgPtr)[1024];
 
 typedef
@@ -19,16 +22,12 @@ typedef
 	void (*Platform_HaltProcedure)(INTEGER);
 
 typedef
-	CHAR (*Platform_MemAdr)[1];
-
-typedef
 	void (*Platform_SignalHandler)(INTEGER);
 
 
 export BOOLEAN Platform_LittleEndian;
 export INTEGER Platform_HaltCode, Platform_PID;
 export CHAR Platform_CWD[4096];
-static Platform_HaltProcedure Platform_HaltHandler;
 static INTEGER Platform_TimeStart;
 export INTEGER Platform_SeekSet, Platform_SeekCur, Platform_SeekEnd;
 export Platform_FileHandle Platform_StdIn, Platform_StdOut, Platform_StdErr;
@@ -58,11 +57,11 @@ export BOOLEAN Platform_Inaccessible (INTEGER e);
 export void Platform_MTimeAsClock (Platform_FileIdentity i, INTEGER *t, INTEGER *d);
 export INTEGER Platform_New (CHAR *n, INTEGER n__len, Platform_FileHandle *h);
 export BOOLEAN Platform_NoSuchDirectory (INTEGER e);
-export Platform_MemAdr Platform_OSAllocate (INTEGER size);
-export void Platform_OSFree (Platform_MemAdr address);
+export Platform_ADR Platform_OSAllocate (INTEGER size);
+export void Platform_OSFree (Platform_ADR address);
 export INTEGER Platform_OldRO (CHAR *n, INTEGER n__len, Platform_FileHandle *h);
 export INTEGER Platform_OldRW (CHAR *n, INTEGER n__len, Platform_FileHandle *h);
-export INTEGER Platform_Read (Platform_FileHandle h, Platform_MemAdr p, INTEGER l, INTEGER *n);
+export INTEGER Platform_Read (Platform_FileHandle h, Platform_ADR p, INTEGER l, INTEGER *n);
 export INTEGER Platform_ReadBuf (Platform_FileHandle h, BYTE *b, INTEGER b__len, INTEGER *n);
 export INTEGER Platform_Rename (CHAR *o, INTEGER o__len, CHAR *n, INTEGER n__len);
 export BOOLEAN Platform_SameFile (Platform_FileIdentity i1, Platform_FileIdentity i2);
@@ -80,7 +79,7 @@ export BOOLEAN Platform_TimedOut (INTEGER e);
 export BOOLEAN Platform_TooManyFiles (INTEGER e);
 export INTEGER Platform_Truncate (Platform_FileHandle h, LONGINT limit);
 export INTEGER Platform_Unlink (CHAR *n, INTEGER n__len);
-export INTEGER Platform_Write (Platform_FileHandle h, Platform_MemAdr p, INTEGER l);
+export INTEGER Platform_Write (Platform_FileHandle h, Platform_ADR p, INTEGER l);
 static void Platform_YMDHMStoClock (INTEGER ye, INTEGER mo, INTEGER da, INTEGER ho, INTEGER mi, INTEGER se, INTEGER *t, INTEGER *d);
 static void Platform_errch (CHAR c);
 static void Platform_errint (INTEGER l);
@@ -90,6 +89,8 @@ export BOOLEAN Platform_getEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER 
 
 extern INTEGER SYSTEM_ArgCount;
 extern void *SYSTEM_ArgVector;
+extern void (*SYSTEM_AssertFailHandler)(INTEGER code);
+extern void (*SYSTEM_HaltHandler)(INTEGER code);
 #include "_windows.h"
 #define Platform_ArgCount()	SYSTEM_ArgCount
 #define Platform_ArgVector()	(Platform_ArgVec)SYSTEM_ArgVector
@@ -108,15 +109,18 @@ extern void *SYSTEM_ArgVector;
 #define Platform_ETIMEDOUT()	WSAETIMEDOUT
 #define Platform_GetTickCount()	(INTEGER)GetTickCount()
 #define Platform_InvalidHandleValue()	((Platform_FileHandle)(SYSTEM_ADR)-1)
+#define Platform_SetAssertFail(p)	SYSTEM_AssertFailHandler = p
+#define Platform_SetHaltHandler(p)	SYSTEM_HaltHandler = p
 #define Platform_SetInterruptHandler(h)	SystemSetInterruptHandler((SYSTEM_ADR)h)
 #define Platform_SetQuitHandler(h)	SystemSetQuitHandler((SYSTEM_ADR)h)
+#define Platform_SystemHalt(code)	__HALT(code)
 #define Platform_ToBYTE(s)	((BYTE)(s))
 #define Platform_ToINT(l)	((INTEGER)(l))
 #define Platform_ToSHORT(i)	((SHORTINT)(i))
 #define Platform_UBYTE(b)	((SHORTINT)(unsigned char)(b))
 #define Platform_UINT(i)	((LONGINT)(unsigned int)(i))
 #define Platform_USHORT(s)	((INTEGER)(unsigned short)(s))
-#define Platform_allocate(size)	((Platform_MemAdr)HeapAlloc(GetProcessHeap(), 0, (size_t)(size)))
+#define Platform_allocate(size)	((Platform_ADR)HeapAlloc(GetProcessHeap(), 0, (size_t)(size)))
 #define Platform_bhfiIndexHigh()	(INTEGER)bhfi.nFileIndexHigh
 #define Platform_bhfiIndexLow()	(INTEGER)bhfi.nFileIndexLow
 #define Platform_bhfiMtimeHigh()	(INTEGER)bhfi.ftLastWriteTime.dwHighDateTime
@@ -215,17 +219,17 @@ BOOLEAN Platform_ConnectionFailed (INTEGER e)
 }
 
 /*----------------------------------------------------------------------------*/
-Platform_MemAdr Platform_OSAllocate (INTEGER size)
+Platform_ADR Platform_OSAllocate (INTEGER size)
 {
 	if (size > 0) {
 		return Platform_allocate(size);
 	}
-	Platform_Halt(-25);
+	Platform_SystemHalt(-25);
 	return NIL;
 }
 
 /*----------------------------------------------------------------------------*/
-void Platform_OSFree (Platform_MemAdr address)
+void Platform_OSFree (Platform_ADR address)
 {
 	Platform_free(address);
 }
@@ -497,7 +501,7 @@ INTEGER Platform_Size (Platform_FileHandle h, LONGINT *len)
 }
 
 /*----------------------------------------------------------------------------*/
-INTEGER Platform_Read (Platform_FileHandle h, Platform_MemAdr p, INTEGER l, INTEGER *n)
+INTEGER Platform_Read (Platform_FileHandle h, Platform_ADR p, INTEGER l, INTEGER *n)
 {
 	INTEGER result;
 	*n = 0;
@@ -516,7 +520,7 @@ INTEGER Platform_ReadBuf (Platform_FileHandle h, BYTE *b, INTEGER b__len, INTEGE
 {
 	INTEGER result;
 	*n = 0;
-	result = Platform_readfile(h, (Platform_MemAdr)((INTEGER)b), b__len, &*n);
+	result = Platform_readfile(h, (Platform_ADR)((INTEGER)b), b__len, &*n);
 	if (result == 0) {
 		*n = 0;
 		return Platform_err();
@@ -527,7 +531,7 @@ INTEGER Platform_ReadBuf (Platform_FileHandle h, BYTE *b, INTEGER b__len, INTEGE
 }
 
 /*----------------------------------------------------------------------------*/
-INTEGER Platform_Write (Platform_FileHandle h, Platform_MemAdr p, INTEGER l)
+INTEGER Platform_Write (Platform_FileHandle h, Platform_ADR p, INTEGER l)
 {
 	INTEGER dummy;
 	if (Platform_writefile(h, p, l, &dummy) == 0) {
@@ -702,12 +706,7 @@ static void Platform_DisplayHaltCode (INTEGER code)
 
 void Platform_Halt (INTEGER code)
 {
-	INTEGER e;
 	Platform_HaltCode = code;
-	Platform_StdOut = Platform_getstdouthandle();
-	if (Platform_HaltHandler != NIL) {
-		(*Platform_HaltHandler)(code);
-	}
 	Platform_errstring((CHAR*)"Terminated by Halt(", 20);
 	Platform_errint(code);
 	Platform_errstring((CHAR*)"). ", 4);
@@ -721,8 +720,6 @@ void Platform_Halt (INTEGER code)
 /*----------------------------------------------------------------------------*/
 void Platform_AssertFail (INTEGER code)
 {
-	INTEGER e;
-	Platform_StdOut = Platform_getstdouthandle();
 	Platform_errstring((CHAR*)"Assertion failure.", 19);
 	if (code != 0) {
 		Platform_errstring((CHAR*)" ASSERT code ", 14);
@@ -736,7 +733,7 @@ void Platform_AssertFail (INTEGER code)
 /*----------------------------------------------------------------------------*/
 void Platform_SetHalt (Platform_HaltProcedure p)
 {
-	Platform_HaltHandler = p;
+	Platform_SetHaltHandler(p);
 }
 
 /*----------------------------------------------------------------------------*/
@@ -757,7 +754,8 @@ export void *Platform__init(void)
 /* BEGIN */
 	Platform_TestLittleEndian();
 	Platform_HaltCode = -128;
-	Platform_HaltHandler = NIL;
+	Platform_SetHalt(Platform_Halt);
+	Platform_SetAssertFail(Platform_AssertFail);
 	Platform_TimeStart = 0;
 	Platform_TimeStart = Platform_Time();
 	Platform_CWD[0] = 0x00;
