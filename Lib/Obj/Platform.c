@@ -26,11 +26,8 @@ typedef
 
 
 export BOOLEAN Platform_LittleEndian;
-export Platform_MemAdr Platform_MainStackFrame;
 export INTEGER Platform_HaltCode, Platform_PID;
 export CHAR Platform_CWD[4096];
-export INTEGER Platform_ArgCount;
-export Platform_ArgVec Platform_ArgVector;
 static Platform_HaltProcedure Platform_HaltHandler;
 static INTEGER Platform_TimeStart;
 export INTEGER Platform_SeekSet, Platform_SeekCur, Platform_SeekEnd;
@@ -58,7 +55,6 @@ export void Platform_Halt (INTEGER code);
 export INTEGER Platform_Identify (Platform_FileHandle h, Platform_FileIdentity *identity, LONGINT *identity__typ);
 export INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, LONGINT *identity__typ);
 export BOOLEAN Platform_Inaccessible (INTEGER e);
-export void Platform_Init (INTEGER argc, Platform_MemAdr argvadr);
 export void Platform_MTimeAsClock (Platform_FileIdentity i, INTEGER *t, INTEGER *d);
 export INTEGER Platform_New (CHAR *n, INTEGER n__len, Platform_FileHandle *h);
 export BOOLEAN Platform_NoSuchDirectory (INTEGER e);
@@ -92,7 +88,11 @@ static void Platform_errln (void);
 static void Platform_errposint (INTEGER l);
 export BOOLEAN Platform_getEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER val__len);
 
+extern INTEGER SYSTEM_ArgCount;
+extern void *SYSTEM_ArgVector;
 #include "_windows.h"
+#define Platform_ArgCount()	SYSTEM_ArgCount
+#define Platform_ArgVector()	(Platform_ArgVec)SYSTEM_ArgVector
 #define Platform_ECONNABORTED()	WSAECONNABORTED
 #define Platform_ECONNREFUSED()	WSAECONNREFUSED
 #define Platform_EHOSTUNREACH()	WSAEHOSTUNREACH
@@ -106,9 +106,7 @@ export BOOLEAN Platform_getEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER 
 #define Platform_ERRORTOOMANYOPENFILES()	ERROR_TOO_MANY_OPEN_FILES
 #define Platform_ERRORWRITEPROTECT()	ERROR_WRITE_PROTECT
 #define Platform_ETIMEDOUT()	WSAETIMEDOUT
-extern void Heap_InitHeap();
 #define Platform_GetTickCount()	(INTEGER)GetTickCount()
-#define Platform_HeapInitHeap()	Heap_InitHeap()
 #define Platform_InvalidHandleValue()	((Platform_FileHandle)(SYSTEM_ADR)-1)
 #define Platform_SetInterruptHandler(h)	SystemSetInterruptHandler((SYSTEM_ADR)h)
 #define Platform_SetQuitHandler(h)	SystemSetQuitHandler((SYSTEM_ADR)h)
@@ -233,21 +231,6 @@ void Platform_OSFree (Platform_MemAdr address)
 }
 
 /*----------------------------------------------------------------------------*/
-typedef
-	Platform_ArgVec (*ArgVecPtr__38)[1];
-
-void Platform_Init (INTEGER argc, Platform_MemAdr argvadr)
-{
-	ArgVecPtr__38 av;
-	Platform_MainStackFrame = argvadr;
-	Platform_ArgCount = argc;
-	av = (ArgVecPtr__38)argvadr;
-	Platform_ArgVector = (*av)[0];
-	Platform_HaltCode = -128;
-	Platform_HeapInitHeap();
-}
-
-/*----------------------------------------------------------------------------*/
 BOOLEAN Platform_getEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER val__len)
 {
 	CHAR buf[4096];
@@ -278,8 +261,10 @@ void Platform_GetEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER val__len)
 /*----------------------------------------------------------------------------*/
 void Platform_GetArg (INTEGER n, CHAR *val, INTEGER val__len)
 {
-	if (n < Platform_ArgCount) {
-		__COPY(*(*Platform_ArgVector)[n], val, val__len);
+	Platform_ArgVec av;
+	if (n < Platform_ArgCount()) {
+		av = Platform_ArgVector();
+		__COPY(*(*av)[n], val, val__len);
 	}
 }
 
@@ -318,7 +303,7 @@ INTEGER Platform_ArgPos (CHAR *s, INTEGER s__len)
 	__DUP(s, s__len);
 	i = 0;
 	Platform_GetArg(i, (void*)arg, 256);
-	while (i < Platform_ArgCount && __STRCMP(s, arg) != 0) {
+	while (i < Platform_ArgCount() && __STRCMP(s, arg) != 0) {
 		i += 1;
 		Platform_GetArg(i, (void*)arg, 256);
 	}
@@ -719,6 +704,7 @@ void Platform_Halt (INTEGER code)
 {
 	INTEGER e;
 	Platform_HaltCode = code;
+	Platform_StdOut = Platform_getstdouthandle();
 	if (Platform_HaltHandler != NIL) {
 		(*Platform_HaltHandler)(code);
 	}
@@ -736,6 +722,7 @@ void Platform_Halt (INTEGER code)
 void Platform_AssertFail (INTEGER code)
 {
 	INTEGER e;
+	Platform_StdOut = Platform_getstdouthandle();
 	Platform_errstring((CHAR*)"Assertion failure.", 19);
 	if (code != 0) {
 		Platform_errstring((CHAR*)" ASSERT code ", 14);

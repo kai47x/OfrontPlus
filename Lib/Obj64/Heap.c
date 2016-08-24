@@ -99,13 +99,13 @@ static void Heap_Sift (LONGINT l, LONGINT r, LONGINT *a, INTEGER a__len);
 export void Heap_Unlock (void);
 
 extern void *Heap__init();
-extern LONGINT Platform_MainStackFrame;
-extern __Platform_MemAdr Platform_OSAllocate(INTEGER size);
+extern void *SYSTEM_MainStackFrame;
+extern void *Platform_OSAllocate(INTEGER size);
 #define Heap_FetchAddress(pointer)	(LONGINT)(SYSTEM_ADR)(*((void**)((SYSTEM_ADR)pointer)))
+#define Heap_Halt(code)	__HALT(code)
 #define Heap_HeapModuleInit()	Heap__init()
+#define Heap_MainStackFrame()	((LONGINT)(SYSTEM_ADR)SYSTEM_MainStackFrame)
 #define Heap_OSAllocate(size)	((LONGINT)(SYSTEM_ADR)Platform_OSAllocate((SYSTEM_ADR)(size)))
-#define Heap_PlatformHalt(code)	Platform_Halt(code)
-#define Heap_PlatformMainStackFrame()	Platform_MainStackFrame
 
 /*============================================================================*/
 
@@ -119,7 +119,7 @@ void Heap_Unlock (void)
 {
 	Heap_lockdepth -= 1;
 	if (Heap_interrupted && Heap_lockdepth == 0) {
-		Heap_PlatformHalt(-9);
+		Heap_Halt(-9);
 	}
 }
 
@@ -591,7 +591,7 @@ static void Heap_MarkStack (LONGINT n, LONGINT *cand, INTEGER cand__len)
 	if (n == 0) {
 		nofcand = 0;
 		sp = (LONGINT)&frame;
-		stack0 = Heap_PlatformMainStackFrame();
+		stack0 = Heap_MainStackFrame();
 		inc = (LONGINT)&align.p - (LONGINT)&align;
 		if (sp > stack0) {
 			inc = -inc;

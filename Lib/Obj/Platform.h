@@ -31,11 +31,8 @@ typedef
 
 
 import BOOLEAN Platform_LittleEndian;
-import Platform_MemAdr Platform_MainStackFrame;
 import INTEGER Platform_HaltCode, Platform_PID;
 import CHAR Platform_CWD[4096];
-import INTEGER Platform_ArgCount;
-import Platform_ArgVec Platform_ArgVector;
 import INTEGER Platform_SeekSet, Platform_SeekCur, Platform_SeekEnd;
 import Platform_FileHandle Platform_StdIn, Platform_StdOut, Platform_StdErr;
 import CHAR Platform_newLine[3];
@@ -60,7 +57,6 @@ import void Platform_Halt (INTEGER code);
 import INTEGER Platform_Identify (Platform_FileHandle h, Platform_FileIdentity *identity, LONGINT *identity__typ);
 import INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, LONGINT *identity__typ);
 import BOOLEAN Platform_Inaccessible (INTEGER e);
-import void Platform_Init (INTEGER argc, Platform_MemAdr argvadr);
 import void Platform_MTimeAsClock (Platform_FileIdentity i, INTEGER *t, INTEGER *d);
 import INTEGER Platform_New (CHAR *n, INTEGER n__len, Platform_FileHandle *h);
 import BOOLEAN Platform_NoSuchDirectory (INTEGER e);
