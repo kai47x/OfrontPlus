@@ -11,7 +11,7 @@ typedef
 	CHAR OfrontOPM_FileName[32];
 
 
-export INTEGER OfrontOPM_ByteSize, OfrontOPM_CharSize, OfrontOPM_BoolSize, OfrontOPM_SIntSize, OfrontOPM_IntSize, OfrontOPM_LIntSize, OfrontOPM_SetSize, OfrontOPM_RealSize, OfrontOPM_LRealSize, OfrontOPM_PointerSize, OfrontOPM_ProcSize, OfrontOPM_RecSize, OfrontOPM_ArrLenSize, OfrontOPM_CharAlign, OfrontOPM_BoolAlign, OfrontOPM_SIntAlign, OfrontOPM_IntAlign, OfrontOPM_LIntAlign, OfrontOPM_SetAlign, OfrontOPM_RealAlign, OfrontOPM_LRealAlign, OfrontOPM_PointerAlign, OfrontOPM_ProcAlign, OfrontOPM_RecAlign, OfrontOPM_ByteOrder, OfrontOPM_BitOrder, OfrontOPM_MaxSet, OfrontOPM_MinSInt, OfrontOPM_MinInt, OfrontOPM_MaxSInt, OfrontOPM_MaxInt, OfrontOPM_MaxIndex;
+export INTEGER OfrontOPM_ByteSize, OfrontOPM_CharSize, OfrontOPM_BoolSize, OfrontOPM_SIntSize, OfrontOPM_IntSize, OfrontOPM_LIntSize, OfrontOPM_SetSize, OfrontOPM_RealSize, OfrontOPM_LRealSize, OfrontOPM_PointerSize, OfrontOPM_ProcSize, OfrontOPM_RecSize, OfrontOPM_ArrLenSize, OfrontOPM_CharAlign, OfrontOPM_BoolAlign, OfrontOPM_SIntAlign, OfrontOPM_IntAlign, OfrontOPM_LIntAlign, OfrontOPM_SetAlign, OfrontOPM_RealAlign, OfrontOPM_LRealAlign, OfrontOPM_PointerAlign, OfrontOPM_ProcAlign, OfrontOPM_RecAlign, OfrontOPM_ByteOrder, OfrontOPM_BitOrder, OfrontOPM_MaxSet, OfrontOPM_MaxHDig, OfrontOPM_MinSInt, OfrontOPM_MinInt, OfrontOPM_MaxSInt, OfrontOPM_MaxInt, OfrontOPM_MaxIndex;
 export LONGINT OfrontOPM_MinLInt, OfrontOPM_MaxLInt;
 export LONGREAL OfrontOPM_MinReal, OfrontOPM_MaxReal, OfrontOPM_MinLReal, OfrontOPM_MaxLReal;
 export BOOLEAN OfrontOPM_noerr;
@@ -594,6 +594,7 @@ static void OfrontOPM_GetProperties (void)
 		OfrontOPM_MaxLInt = -(OfrontOPM_MinLInt + 1);
 	}
 	OfrontOPM_MaxSet = __ASHL(OfrontOPM_SetSize, 3, INTEGER) - 1;
+	OfrontOPM_MaxHDig = __ASHL(OfrontOPM_LIntSize, 1, INTEGER);
 	if (OfrontOPM_ArrLenSize == -1) {
 		OfrontOPM_ArrLenSize = OfrontOPM_LIntSize;
 	} else if (!((OfrontOPM_ArrLenSize == OfrontOPM_SIntSize || OfrontOPM_ArrLenSize == OfrontOPM_IntSize) || OfrontOPM_ArrLenSize == OfrontOPM_LIntSize)) {
