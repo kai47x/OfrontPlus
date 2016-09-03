@@ -1,13 +1,13 @@
 /* Ofront+ 0.9 -xtspkaem */
 #include "SYSTEM.h"
 #include "Heap.h"
+#include "Kernel.h"
 #include "OfrontOPB.h"
 #include "OfrontOPC.h"
 #include "OfrontOPM.h"
 #include "OfrontOPP.h"
 #include "OfrontOPT.h"
 #include "OfrontOPV.h"
-#include "Platform.h"
 
 
 
@@ -80,7 +80,7 @@ void OfrontCmd_Translate (void)
 		Heap_GC(0);
 		OfrontCmd_Module(&done);
 		if (!done) {
-			Platform_Exit(1);
+			Kernel_Exit(1);
 		}
 	}
 }
@@ -90,13 +90,13 @@ static void OfrontCmd_Trap (INTEGER sig)
 {
 	Heap_FINALL();
 	if (sig == 3) {
-		Platform_Exit(0);
+		Kernel_Exit(0);
 	} else {
-		if (sig == 4 && Platform_HaltCode == -15) {
+		if (sig == 4 && Kernel_HaltCode == -15) {
 			OfrontOPM_LogWStr((CHAR*)" --- Ofront+: internal error", 29);
 			OfrontOPM_LogWLn();
 		}
-		Platform_Exit(2);
+		Kernel_Exit(2);
 	}
 }
 
@@ -105,19 +105,19 @@ int main(int argc, char **argv)
 {
 	__INIT(argc, argv);
 	__IMPORT(Heap__init);
+	__IMPORT(Kernel__init);
 	__IMPORT(OfrontOPB__init);
 	__IMPORT(OfrontOPC__init);
 	__IMPORT(OfrontOPM__init);
 	__IMPORT(OfrontOPP__init);
 	__IMPORT(OfrontOPT__init);
 	__IMPORT(OfrontOPV__init);
-	__IMPORT(Platform__init);
 	__REGMAIN("OfrontCmd", 0);
 	__REGCMD("Translate", OfrontCmd_Translate);
 /* BEGIN */
-	Platform_SetInterruptHandler(OfrontCmd_Trap);
-	Platform_SetQuitHandler(OfrontCmd_Trap);
-	Platform_SetBadInstructionHandler(OfrontCmd_Trap);
+	Kernel_SetInterruptHandler(OfrontCmd_Trap);
+	Kernel_SetQuitHandler(OfrontCmd_Trap);
+	Kernel_SetBadInstructionHandler(OfrontCmd_Trap);
 	OfrontOPB_typSize = OfrontOPV_TypSize;
 	OfrontOPT_typSize = OfrontOPV_TypSize;
 	OfrontCmd_Translate();
