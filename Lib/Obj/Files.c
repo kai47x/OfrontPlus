@@ -223,8 +223,8 @@ static void Files_Create (Files_File f)
 			f->registerName[0] = 0x00;
 			f->tempFile = 0;
 		}
-		error = Platform_Unlink((void*)f->workName, 101);
-		error = Platform_New((void*)f->workName, 101, &f->fd);
+		error = Platform_DeleteFile((void*)f->workName, 101);
+		error = Platform_NewFile((void*)f->workName, 101, &f->fd);
 		done = error == 0;
 		if (done) {
 			f->next = Files_files;
@@ -285,7 +285,7 @@ static void Files_CloseOSFile (Files_File f)
 			prev->next = f->next;
 		}
 	}
-	error = Platform_Close(f->fd);
+	error = Platform_CloseFile(f->fd);
 	f->fd = Platform_InvalidHandleValue();
 	f->state = 1;
 	Heap_FileCount -= 1;
@@ -406,7 +406,7 @@ static Files_File Files_CacheEntry (Platform_FileIdentity identity)
 				}
 				f->swapper = -1;
 				f->identity = identity;
-				error = Platform_Size(f->fd, &len);
+				error = Platform_FileSize(f->fd, &len);
 				f->len = len;
 			}
 			return f;
@@ -465,7 +465,7 @@ Files_File Files_Old (CHAR *name, INTEGER name__len)
 					f->state = 0;
 					f->pos = 0;
 					f->swapper = -1;
-					error = Platform_Size(fd, &len);
+					error = Platform_FileSize(fd, &len);
 					f->len = len;
 					__COPY(name, f->workName, 101);
 					f->registerName[0] = 0x00;
@@ -504,7 +504,7 @@ void Files_Purge (Files_File f)
 		i += 1;
 	}
 	if (f->fd != Platform_InvalidHandleValue()) {
-		error = Platform_Truncate(f->fd, 0);
+		error = Platform_TruncateFile(f->fd, 0);
 		error = Platform_Seek(f->fd, 0, Platform_SeekSet);
 	}
 	f->pos = 0;
@@ -730,7 +730,7 @@ void Files_WriteBytes (Files_Rider *r, LONGINT *r__typ, BYTE *x, INTEGER x__len,
 /*----------------------------------------------------------------------------*/
 void Files_Delete (CHAR *name, INTEGER name__len, INTEGER *res)
 {
-	*res = Platform_Unlink((void*)name, name__len);
+	*res = Platform_DeleteFile((void*)name, name__len);
 }
 
 /*----------------------------------------------------------------------------*/
@@ -746,7 +746,7 @@ void Files_Rename (CHAR *old, INTEGER old__len, CHAR *new, INTEGER new__len, INT
 		if (error != 0 && !Platform_SameFile(oldidentity, newidentity)) {
 			Files_Delete(new, new__len, &error);
 		}
-		error = Platform_Rename((void*)old, old__len, (void*)new, new__len);
+		error = Platform_RenameFile((void*)old, old__len, (void*)new, new__len);
 		if (!Platform_DifferentFilesystems(error)) {
 			*res = error;
 			return;
@@ -756,9 +756,9 @@ void Files_Rename (CHAR *old, INTEGER old__len, CHAR *new, INTEGER new__len, INT
 				*res = 2;
 				return;
 			}
-			error = Platform_New((void*)new, new__len, &fdnew);
+			error = Platform_NewFile((void*)new, new__len, &fdnew);
 			if (error != 0) {
-				error = Platform_Close(fdold);
+				error = Platform_CloseFile(fdold);
 				*res = 3;
 				return;
 			}
@@ -766,16 +766,16 @@ void Files_Rename (CHAR *old, INTEGER old__len, CHAR *new, INTEGER new__len, INT
 			while (n > 0) {
 				error = Platform_Write(fdnew, (Platform_ADR)((INTEGER)buf), n);
 				if (error != 0) {
-					ignore = Platform_Close(fdold);
-					ignore = Platform_Close(fdnew);
+					ignore = Platform_CloseFile(fdold);
+					ignore = Platform_CloseFile(fdnew);
 					Files_Err((CHAR*)"cannot move file", 17, NIL, error);
 				}
 				error = Platform_Read(fdold, (Platform_ADR)((INTEGER)buf), 4096, &n);
 			}
-			ignore = Platform_Close(fdold);
-			ignore = Platform_Close(fdnew);
+			ignore = Platform_CloseFile(fdold);
+			ignore = Platform_CloseFile(fdnew);
 			if (n == 0) {
-				error = Platform_Unlink((void*)old, old__len);
+				error = Platform_DeleteFile((void*)old, old__len);
 				*res = 0;
 			} else {
 				Files_Err((CHAR*)"cannot move file", 17, NIL, error);
@@ -1044,7 +1044,7 @@ static void Files_Finalize (SYSTEM_PTR o)
 	if (f->fd != Platform_InvalidHandleValue()) {
 		Files_CloseOSFile(f);
 		if (f->tempFile) {
-			res = Platform_Unlink((void*)f->workName, 101);
+			res = Platform_DeleteFile((void*)f->workName, 101);
 		}
 	}
 }
