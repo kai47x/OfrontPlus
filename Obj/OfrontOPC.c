@@ -63,6 +63,7 @@ static void OfrontOPC_InitTProcs (OfrontOPT_Object typ, OfrontOPT_Object obj);
 export void OfrontOPC_Len (OfrontOPT_Object obj, OfrontOPT_Struct array, LONGINT dim);
 static void OfrontOPC_LenList (OfrontOPT_Object par, BOOLEAN ansiDefine, BOOLEAN showParamName);
 static INTEGER OfrontOPC_Length (CHAR *s, INTEGER s__len);
+export BOOLEAN OfrontOPC_NeedsRetval (OfrontOPT_Object proc);
 export LONGINT OfrontOPC_NofPtrs (OfrontOPT_Struct typ);
 static INTEGER OfrontOPC_PerfectHash (CHAR *s, INTEGER s__len);
 static BOOLEAN OfrontOPC_Prefixed (OfrontOPT_ConstExt x, CHAR *y, INTEGER y__len);
@@ -748,10 +749,12 @@ static void OfrontOPC_DefineType (OfrontOPT_Struct str)
 static BOOLEAN OfrontOPC_Prefixed (OfrontOPT_ConstExt x, CHAR *y, INTEGER y__len)
 {
 	INTEGER i;
+	__DUP(y, y__len);
 	i = 0;
 	while ((*x)[__X(i + 1, 256)] == y[__X(i, y__len)]) {
 		i += 1;
 	}
+	__DEL(y);
 	return y[__X(i, y__len)] == 0x00;
 }
 
@@ -1546,6 +1549,12 @@ void OfrontOPC_DefineInter (OfrontOPT_Object proc)
 }
 
 /*----------------------------------------------------------------------------*/
+BOOLEAN OfrontOPC_NeedsRetval (OfrontOPT_Object proc)
+{
+	return proc->typ != OfrontOPT_notyp && !proc->scope->leaf;
+}
+
+/*----------------------------------------------------------------------------*/
 void OfrontOPC_EnterProc (OfrontOPT_Object proc)
 {
 	OfrontOPT_Object var = NIL, scope = NIL;
@@ -1564,6 +1573,12 @@ void OfrontOPC_EnterProc (OfrontOPT_Object proc)
 		OfrontOPM_WriteStringVar((void*)scope->name, 32);
 		OfrontOPM_Write(' ');
 		OfrontOPM_WriteString((CHAR*)"_s", 3);
+		OfrontOPC_EndStat();
+	}
+	if (OfrontOPC_NeedsRetval(proc)) {
+		OfrontOPC_BegStat();
+		OfrontOPC_Ident(proc->typ->strobj);
+		OfrontOPM_WriteString((CHAR*)" __retval", 10);
 		OfrontOPC_EndStat();
 	}
 	var = proc->link;

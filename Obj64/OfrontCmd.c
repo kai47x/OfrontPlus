@@ -19,6 +19,20 @@ static void OfrontCmd_Trap (INTEGER sig);
 
 /*============================================================================*/
 
+static void OfrontCmd_Trap (INTEGER sig)
+{
+	Heap_FINALL();
+	if (sig == 3) {
+		Kernel_Exit(1);
+	} else {
+		if (sig == 4 && Kernel_HaltCode == -15) {
+			OfrontOPM_LogWStr((CHAR*)" --- Ofront+: internal error", 29);
+			OfrontOPM_LogWLn();
+		}
+		Kernel_Exit(2);
+	}
+}
+
 void OfrontCmd_Module (BOOLEAN *done)
 {
 	BOOLEAN ext, new;
@@ -60,7 +74,7 @@ void OfrontCmd_Module (BOOLEAN *done)
 void OfrontCmd_Translate (void)
 {
 	BOOLEAN done;
-	OfrontOPM_OpenPar();
+	OfrontOPM_OpenPar((CHAR*)"Ofront+ (TM) - Oberon family of languages to C Translator v0.9", 63, (CHAR*)"ofront+", 8);
 	OfrontOPT_bytetyp->size = OfrontOPM_ByteSize;
 	OfrontOPT_sysptrtyp->size = OfrontOPM_PointerSize;
 	OfrontOPT_chartyp->size = OfrontOPM_CharSize;
@@ -72,34 +86,25 @@ void OfrontCmd_Translate (void)
 	OfrontOPT_sinttyp->size = OfrontOPM_SIntSize;
 	OfrontOPT_booltyp->size = OfrontOPM_BoolSize;
 	for (;;) {
-		OfrontOPM_Init(&done);
+		OfrontOPM_Init((CHAR*)"translating", 12, &done);
 		if (!done) {
+			if (!OfrontOPM_noerr) {
+				Heap_FINALL();
+				Kernel_Exit(1);
+			}
 			break;
 		}
 		OfrontOPM_InitOptions();
 		Heap_GC(0);
 		OfrontCmd_Module(&done);
 		if (!done) {
+			Heap_FINALL();
 			Kernel_Exit(1);
 		}
 	}
 }
 
 /*----------------------------------------------------------------------------*/
-static void OfrontCmd_Trap (INTEGER sig)
-{
-	Heap_FINALL();
-	if (sig == 3) {
-		Kernel_Exit(0);
-	} else {
-		if (sig == 4 && Kernel_HaltCode == -15) {
-			OfrontOPM_LogWStr((CHAR*)" --- Ofront+: internal error", 29);
-			OfrontOPM_LogWLn();
-		}
-		Kernel_Exit(2);
-	}
-}
-
 
 int main(int argc, char **argv)
 {

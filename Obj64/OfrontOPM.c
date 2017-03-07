@@ -47,7 +47,7 @@ export void OfrontOPM_Get (CHAR *ch);
 static void OfrontOPM_GetProperties (void);
 static void OfrontOPM_GetProperty (Texts_Scanner *S, LONGINT *S__typ, CHAR *name, INTEGER name__len, INTEGER *size, INTEGER *align);
 static void OfrontOPM_GetProperty1 (Texts_Scanner *S, LONGINT *S__typ, CHAR *name, INTEGER name__len, INTEGER *par, INTEGER defval);
-export void OfrontOPM_Init (BOOLEAN *done);
+export void OfrontOPM_Init (CHAR *msg, INTEGER msg__len, BOOLEAN *done);
 export void OfrontOPM_InitOptions (void);
 static void OfrontOPM_LogErrMsg (INTEGER n);
 export void OfrontOPM_LogW (CHAR ch);
@@ -59,7 +59,7 @@ export void OfrontOPM_Mark (INTEGER n, LONGINT pos1);
 export void OfrontOPM_NewSym (CHAR *modName, INTEGER modName__len);
 export void OfrontOPM_OldSym (CHAR *modName, INTEGER modName__len, BOOLEAN *done);
 export void OfrontOPM_OpenFiles (CHAR *moduleName, INTEGER moduleName__len);
-export void OfrontOPM_OpenPar (void);
+export void OfrontOPM_OpenPar (CHAR *title, INTEGER title__len, CHAR *cmd, INTEGER cmd__len);
 export void OfrontOPM_PromoteIntConstToLInt (void);
 export void OfrontOPM_RegisterNewSym (void);
 static void OfrontOPM_ScanOptions (CHAR *s, INTEGER s__len, SET *opt);
@@ -178,20 +178,24 @@ static void OfrontOPM_ScanOptions (CHAR *s, INTEGER s__len, SET *opt)
 	}
 }
 
-void OfrontOPM_OpenPar (void)
+void OfrontOPM_OpenPar (CHAR *title, INTEGER title__len, CHAR *cmd, INTEGER cmd__len)
 {
 	CHAR s[256];
+	__DUP(title, title__len);
+	__DUP(cmd, cmd__len);
 	if (Args_argc == 1) {
 		OfrontOPM_stop = 1;
 		Console_Ln();
-		Console_String((CHAR*)"OfrontPlus - Oberon family of languages to C Translator v0.9", 61);
+		Console_String(title, title__len);
 		Console_Ln();
-		Console_String((CHAR*)"Copyright (c) Software Templ OEG, 1995-2007 & VEDAsoft Oberon Club, 2013-2016", 78);
+		Console_String((CHAR*)"Copyright (c) Software Templ OEG, 1995-2007 & VEDAsoft Oberon Club, 2013-2017", 78);
 		Console_Ln();
 		Console_Ln();
 		Console_String((CHAR*)"SYNOPSIS", 9);
 		Console_Ln();
-		Console_String((CHAR*)"  command = \"ofront+\" options {file options}.", 46);
+		Console_String((CHAR*)"  command = \"", 14);
+		Console_String(cmd, cmd__len);
+		Console_String((CHAR*)"\" options {file options}.", 26);
 		Console_Ln();
 		Console_String((CHAR*)"  options = [\"-\" {option} ].", 29);
 		Console_Ln();
@@ -201,7 +205,7 @@ void OfrontOPM_OpenPar (void)
 		Console_Ln();
 	} else {
 		OfrontOPM_GetProperties();
-		OfrontOPM_glbopt = 0x08e9;
+		OfrontOPM_glbopt = 0x0af9;
 		OfrontOPM_S = 1;
 		s[0] = 0x00;
 		Args_Get(1, (void*)s, 256);
@@ -213,6 +217,8 @@ void OfrontOPM_OpenPar (void)
 			Args_Get(OfrontOPM_S, (void*)s, 256);
 		}
 	}
+	__DEL(title);
+	__DEL(cmd);
 }
 
 /*----------------------------------------------------------------------------*/
@@ -239,14 +245,17 @@ void OfrontOPM_InitOptions (void)
 }
 
 /*----------------------------------------------------------------------------*/
-void OfrontOPM_Init (BOOLEAN *done)
+void OfrontOPM_Init (CHAR *msg, INTEGER msg__len, BOOLEAN *done)
 {
 	Texts_Text T = NIL;
-	INTEGER beg, end, time;
+	LONGINT beg, end, time;
 	CHAR s[256];
+	__DUP(msg, msg__len);
 	*done = 0;
 	OfrontOPM_curpos = 0;
 	if (OfrontOPM_stop || OfrontOPM_S >= Args_argc) {
+		OfrontOPM_noerr = 1;
+		__DEL(msg);
 		return;
 	}
 	s[0] = 0x00;
@@ -254,19 +263,22 @@ void OfrontOPM_Init (BOOLEAN *done)
 	__NEW(T, Texts_TextDesc);
 	Texts_Open(T, s, 256);
 	OfrontOPM_LogWStr(s, 256);
-	if (T->len == 0) {
+	if (Files_Old(s, 256) == NIL) {
 		OfrontOPM_LogWStr((CHAR*)" not found", 11);
 		OfrontOPM_LogWLn();
+		OfrontOPM_noerr = 0;
 	} else {
 		Texts_OpenReader(&OfrontOPM_inR, Texts_Reader__typ, T, 0);
-		OfrontOPM_LogWStr((CHAR*)"  translating", 14);
+		OfrontOPM_LogWStr((CHAR*)"  ", 3);
+		OfrontOPM_LogWStr(msg, msg__len);
 		*done = 1;
+		OfrontOPM_noerr = 1;
 	}
 	OfrontOPM_S += 1;
 	OfrontOPM_level = 0;
-	OfrontOPM_noerr = 1;
 	OfrontOPM_errpos = OfrontOPM_curpos;
 	OfrontOPM_lasterrpos = OfrontOPM_curpos - 10;
+	__DEL(msg);
 }
 
 /*----------------------------------------------------------------------------*/
@@ -982,7 +994,6 @@ export void *OfrontOPM__init(void)
 	__REGCMD("DeleteNewSym", OfrontOPM_DeleteNewSym);
 	__REGCMD("InitOptions", OfrontOPM_InitOptions);
 	__REGCMD("LogWLn", OfrontOPM_LogWLn);
-	__REGCMD("OpenPar", OfrontOPM_OpenPar);
 	__REGCMD("PromoteIntConstToLInt", OfrontOPM_PromoteIntConstToLInt);
 	__REGCMD("RegisterNewSym", OfrontOPM_RegisterNewSym);
 	__REGCMD("WriteLn", OfrontOPM_WriteLn);

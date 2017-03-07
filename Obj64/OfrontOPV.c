@@ -1592,6 +1592,20 @@ static void OfrontOPV_stat (OfrontOPT_Node n, OfrontOPT_Object outerProc)
 					} else {
 						OfrontOPM_WriteString((CHAR*)"__ENDMOD", 9);
 					}
+				} else if (OfrontOPC_NeedsRetval(outerProc)) {
+					OfrontOPM_WriteString((CHAR*)"__retval = ", 12);
+					if (n->left->typ->form == 13 && n->obj->typ != n->left->typ) {
+						OfrontOPM_WriteString((CHAR*)"(void*)", 8);
+						OfrontOPV_expr(n->left, 10);
+					} else {
+						OfrontOPV_expr(n->left, -1);
+					}
+					OfrontOPC_EndStat();
+					OfrontOPC_BegStat();
+					OfrontOPC_ExitProc(outerProc, 0, 0);
+					OfrontOPC_EndStat();
+					OfrontOPC_BegStat();
+					OfrontOPM_WriteString((CHAR*)"return __retval", 16);
 				} else {
 					OfrontOPC_ExitProc(outerProc, 0, 0);
 					OfrontOPM_WriteString((CHAR*)"return", 7);
