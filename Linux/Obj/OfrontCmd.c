@@ -1,13 +1,13 @@
 /* Ofront+ 0.9 -xtspkaem */
 #include "SYSTEM.h"
 #include "Heap.h"
+#include "Kernel.h"
 #include "OfrontOPB.h"
 #include "OfrontOPC.h"
 #include "OfrontOPM.h"
 #include "OfrontOPP.h"
 #include "OfrontOPT.h"
 #include "OfrontOPV.h"
-#include "Platform.h"
 
 
 
@@ -18,6 +18,20 @@ static void OfrontCmd_Trap (INTEGER sig);
 
 
 /*============================================================================*/
+
+static void OfrontCmd_Trap (INTEGER sig)
+{
+	Heap_FINALL();
+	if (sig == 3) {
+		Kernel_Exit(1);
+	} else {
+		if (sig == 4 && Kernel_HaltCode == -15) {
+			OfrontOPM_LogWStr((CHAR*)" --- Ofront+: internal error", 29);
+			OfrontOPM_LogWLn();
+		}
+		Kernel_Exit(2);
+	}
+}
 
 void OfrontCmd_Module (BOOLEAN *done)
 {
@@ -60,7 +74,7 @@ void OfrontCmd_Module (BOOLEAN *done)
 void OfrontCmd_Translate (void)
 {
 	BOOLEAN done;
-	OfrontOPM_OpenPar();
+	OfrontOPM_OpenPar((CHAR*)"Ofront+ (TM) - Oberon family of languages to C Translator v0.9", 63, (CHAR*)"ofront+", 8);
 	OfrontOPT_bytetyp->size = OfrontOPM_ByteSize;
 	OfrontOPT_sysptrtyp->size = OfrontOPM_PointerSize;
 	OfrontOPT_chartyp->size = OfrontOPM_CharSize;
@@ -72,52 +86,43 @@ void OfrontCmd_Translate (void)
 	OfrontOPT_sinttyp->size = OfrontOPM_SIntSize;
 	OfrontOPT_booltyp->size = OfrontOPM_BoolSize;
 	for (;;) {
-		OfrontOPM_Init(&done);
+		OfrontOPM_Init((CHAR*)"translating", 12, &done);
 		if (!done) {
+			if (!OfrontOPM_noerr) {
+				Heap_FINALL();
+				Kernel_Exit(1);
+			}
 			break;
 		}
 		OfrontOPM_InitOptions();
-		//Heap_GC(0);
+		Heap_GC(0);
 		OfrontCmd_Module(&done);
 		if (!done) {
-			Platform_Exit(1);
+			Heap_FINALL();
+			Kernel_Exit(1);
 		}
 	}
 }
 
 /*----------------------------------------------------------------------------*/
-static void OfrontCmd_Trap (INTEGER sig)
-{
-	Heap_FINALL();
-	if (sig == 3) {
-		Platform_Exit(0);
-	} else {
-		if (sig == 4 && Platform_HaltCode == -15) {
-			OfrontOPM_LogWStr((CHAR*)" --- Ofront+: internal error", 29);
-			OfrontOPM_LogWLn();
-		}
-		Platform_Exit(2);
-	}
-}
-
 
 int main(int argc, char **argv)
 {
 	__INIT(argc, argv);
 	__IMPORT(Heap__init);
+	__IMPORT(Kernel__init);
 	__IMPORT(OfrontOPB__init);
 	__IMPORT(OfrontOPC__init);
 	__IMPORT(OfrontOPM__init);
 	__IMPORT(OfrontOPP__init);
 	__IMPORT(OfrontOPT__init);
 	__IMPORT(OfrontOPV__init);
-	__IMPORT(Platform__init);
 	__REGMAIN("OfrontCmd", 0);
 	__REGCMD("Translate", OfrontCmd_Translate);
 /* BEGIN */
-	Platform_SetInterruptHandler(OfrontCmd_Trap);
-	Platform_SetQuitHandler(OfrontCmd_Trap);
-	Platform_SetBadInstructionHandler(OfrontCmd_Trap);
+	Kernel_SetInterruptHandler(OfrontCmd_Trap);
+	Kernel_SetQuitHandler(OfrontCmd_Trap);
+	Kernel_SetBadInstructionHandler(OfrontCmd_Trap);
 	OfrontOPB_typSize = OfrontOPV_TypSize;
 	OfrontOPT_typSize = OfrontOPV_TypSize;
 	OfrontCmd_Translate();

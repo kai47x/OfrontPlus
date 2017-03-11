@@ -222,7 +222,9 @@ void OfrontOPT_OpenScope (SHORTINT level, OfrontOPT_Object owner)
 /*----------------------------------------------------------------------------*/
 void OfrontOPT_CloseScope (void)
 {
-	OfrontOPT_topScope = OfrontOPT_topScope->left;
+	if (OfrontOPT_topScope != NIL) {
+		OfrontOPT_topScope = OfrontOPT_topScope->left;
+	}
 }
 
 /*----------------------------------------------------------------------------*/
@@ -540,7 +542,7 @@ void OfrontOPT_FPrintStr (OfrontOPT_Struct typ)
 			bstrobj = btyp->strobj;
 			if (((strobj == NIL || strobj->name[0] == 0x00) || bstrobj == NIL) || bstrobj->name[0] == 0x00) {
 				OfrontOPT_FPrintStr(btyp);
-				OfrontOPM_FPrint(&pbfp, btyp->pbfp);
+				OfrontOPM_FPrint(&pbfp, btyp->pbfp + 12345);
 				pvfp = pbfp;
 			}
 		} else if (f == 14) {

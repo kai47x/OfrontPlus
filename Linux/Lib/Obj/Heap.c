@@ -99,13 +99,19 @@ static void Heap_Sift (INTEGER l, INTEGER r, INTEGER *a, INTEGER a__len);
 export void Heap_Unlock (void);
 
 extern void *Heap__init();
-extern INTEGER Platform_MainStackFrame;
-extern __Platform_MemAdr Platform_OSAllocate(INTEGER size);
+extern void *SYSTEM_MainStackFrame;
+#if defined __linux__ || defined __unix__
+#  include <stdlib.h>
+#  define OSAllocate(size) malloc((size_t)(size))
+#else
+#  include "_windows.h"
+#  define OSAllocate(size) HeapAlloc(GetProcessHeap(), 0, (size_t)(size))
+#endif
 #define Heap_FetchAddress(pointer)	(INTEGER)(SYSTEM_ADR)(*((void**)((SYSTEM_ADR)pointer)))
+#define Heap_Halt(code)	__HALT(code)
 #define Heap_HeapModuleInit()	Heap__init()
-#define Heap_OSAllocate(size)	((INTEGER)(SYSTEM_ADR)Platform_OSAllocate((SYSTEM_ADR)(size)))
-#define Heap_PlatformHalt(code)	Platform_Halt(code)
-#define Heap_PlatformMainStackFrame()	Platform_MainStackFrame
+#define Heap_MainStackFrame()	((INTEGER)(SYSTEM_ADR)SYSTEM_MainStackFrame)
+#define Heap_OSAllocate(size)	((INTEGER)(SYSTEM_ADR)OSAllocate(size))
 
 /*============================================================================*/
 
@@ -119,7 +125,7 @@ void Heap_Unlock (void)
 {
 	Heap_lockdepth -= 1;
 	if (Heap_interrupted && Heap_lockdepth == 0) {
-		Heap_PlatformHalt(-9);
+		Heap_Halt(-9);
 	}
 }
 
@@ -592,7 +598,7 @@ static void Heap_MarkStack (INTEGER n, INTEGER *cand, INTEGER cand__len)
 	if (n == 0) {
 		nofcand = 0;
 		sp = (INTEGER)&frame;
-		stack0 = Heap_PlatformMainStackFrame();
+		stack0 = Heap_MainStackFrame();
 		inc = (INTEGER)&align.p - (INTEGER)&align;
 		if (sp > stack0) {
 			inc = -inc;

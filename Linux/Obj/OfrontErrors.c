@@ -481,6 +481,9 @@ void OfrontErrors_LogErrMsg (INTEGER n)
 		case 306: 
 			Console_String((CHAR*)"inappropriate symbol file ignored", 34);
 			break;
+		case 308: 
+			Console_String((CHAR*)"SYSTEM.VAL result includes memory past end of source variable", 62);
+			break;
 		default: __CASECHK;
 	}
 }

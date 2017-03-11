@@ -25,7 +25,7 @@ export void Console_String (CHAR *s, INTEGER s__len);
 void Console_Flush (void)
 {
 	INTEGER error;
-	error = Platform_Write(1, (Platform_MemAdr)((INTEGER)Console_line), Console_pos);
+	error = Platform_Write(1, (Platform_ADR)((INTEGER)Console_line), Console_pos);
 	Console_pos = 0;
 }
 

@@ -178,8 +178,8 @@ static void OfrontOPS_Number (void)
 			} else if (OfrontOPS_ch == 'H') {
 				OfrontOPM_Get(&OfrontOPS_ch);
 				OfrontOPS_numtyp = 2;
-				if (n <= 16) {
-					if (n == 16 && dig[0] > '7') {
+				if (n <= OfrontOPM_MaxHDig) {
+					if (n == OfrontOPM_MaxHDig && dig[0] > '7') {
 						OfrontOPS_intval = -1;
 					}
 					while (i < n) {
