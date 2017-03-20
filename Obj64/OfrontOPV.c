@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -e */
 #include "SYSTEM.h"
 #include "OfrontOPC.h"
 #include "OfrontOPM.h"
@@ -18,7 +18,7 @@ static OfrontOPV_ExitInfo OfrontOPV_exit;
 static INTEGER OfrontOPV_nofExitLabels;
 static BOOLEAN OfrontOPV_naturalAlignment;
 
-export LONGINT *OfrontOPV_ExitInfo__typ;
+export SYSTEM_ADR *OfrontOPV_ExitInfo__typ;
 
 static void OfrontOPV_ActualPar (OfrontOPT_Node n, OfrontOPT_Object fp);
 export void OfrontOPV_AdrAndSize (OfrontOPT_Object topScope);

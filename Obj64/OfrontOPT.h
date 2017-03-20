@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -e */
 
 #ifndef OfrontOPT__h
 #define OfrontOPT__h
@@ -74,10 +74,10 @@ import OfrontOPT_Object OfrontOPT_GlbMod[64];
 import OfrontOPS_Name OfrontOPT_SelfName;
 import BOOLEAN OfrontOPT_SYSimported;
 
-import LONGINT *OfrontOPT_ConstDesc__typ;
-import LONGINT *OfrontOPT_ObjDesc__typ;
-import LONGINT *OfrontOPT_StrDesc__typ;
-import LONGINT *OfrontOPT_NodeDesc__typ;
+import SYSTEM_ADR *OfrontOPT_ConstDesc__typ;
+import SYSTEM_ADR *OfrontOPT_ObjDesc__typ;
+import SYSTEM_ADR *OfrontOPT_StrDesc__typ;
+import SYSTEM_ADR *OfrontOPT_NodeDesc__typ;
 
 import void OfrontOPT_Close (void);
 import void OfrontOPT_CloseScope (void);

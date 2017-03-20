@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -e */
 #include "SYSTEM.h"
 #include "OfrontOPM.h"
 #include "OfrontOPS.h"
@@ -94,12 +94,12 @@ static OfrontOPT_ExpCtxt OfrontOPT_expCtxt;
 static LONGINT OfrontOPT_nofhdfld;
 static BOOLEAN OfrontOPT_newsf, OfrontOPT_findpc, OfrontOPT_extsf, OfrontOPT_sfpresent, OfrontOPT_symExtended, OfrontOPT_symNew;
 
-export LONGINT *OfrontOPT_ConstDesc__typ;
-export LONGINT *OfrontOPT_ObjDesc__typ;
-export LONGINT *OfrontOPT_StrDesc__typ;
-export LONGINT *OfrontOPT_NodeDesc__typ;
-export LONGINT *OfrontOPT_ImpCtxt__typ;
-export LONGINT *OfrontOPT_ExpCtxt__typ;
+export SYSTEM_ADR *OfrontOPT_ConstDesc__typ;
+export SYSTEM_ADR *OfrontOPT_ObjDesc__typ;
+export SYSTEM_ADR *OfrontOPT_StrDesc__typ;
+export SYSTEM_ADR *OfrontOPT_NodeDesc__typ;
+export SYSTEM_ADR *OfrontOPT_ImpCtxt__typ;
+export SYSTEM_ADR *OfrontOPT_ExpCtxt__typ;
 
 export void OfrontOPT_Close (void);
 export void OfrontOPT_CloseScope (void);

@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -e */
 
 #ifndef OfrontOPV__h
 #define OfrontOPV__h

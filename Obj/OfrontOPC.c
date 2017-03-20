@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -e */
 #include "SYSTEM.h"
 #include "OfrontOPM.h"
 #include "OfrontOPT.h"
@@ -1071,7 +1071,7 @@ static void OfrontOPC_IdentList (OfrontOPT_Object obj, INTEGER vis)
 			} else if (obj->mode == 2 && obj->typ->comp == 4) {
 				OfrontOPC_EndStat();
 				OfrontOPC_BegStat();
-				OfrontOPM_WriteString((CHAR*)"LONGINT *", 10);
+				OfrontOPM_WriteString((CHAR*)"SYSTEM_ADR *", 13);
 				OfrontOPC_Ident(obj);
 				OfrontOPM_WriteString((CHAR*)"__typ", 6);
 				base = NIL;
@@ -1114,7 +1114,7 @@ static void OfrontOPC_AnsiParamList (OfrontOPT_Object obj, BOOLEAN showParamName
 				}
 				OfrontOPC_LenList(obj, 1, showParamNames);
 			} else if (obj->mode == 2 && obj->typ->comp == 4) {
-				OfrontOPM_WriteString((CHAR*)", LONGINT *", 12);
+				OfrontOPM_WriteString((CHAR*)", SYSTEM_ADR *", 15);
 				if (showParamNames) {
 					OfrontOPC_Ident(obj);
 					OfrontOPM_WriteString((CHAR*)"__typ", 6);
@@ -1213,7 +1213,7 @@ static void OfrontOPC_GenDynTypes (OfrontOPT_Node n, INTEGER vis)
 			} else {
 				OfrontOPM_WriteString((CHAR*)"export ", 8);
 			}
-			OfrontOPM_WriteString((CHAR*)"LONGINT *", 10);
+			OfrontOPM_WriteString((CHAR*)"SYSTEM_ADR *", 13);
 			OfrontOPC_Andent(typ);
 			OfrontOPM_WriteString((CHAR*)"__typ", 6);
 			OfrontOPC_EndStat();
@@ -1248,64 +1248,52 @@ void OfrontOPC_GenHdr (OfrontOPT_Node n)
 /*----------------------------------------------------------------------------*/
 static void OfrontOPC_GenHeaderMsg (void)
 {
-	INTEGER i;
 	OfrontOPM_WriteString((CHAR*)"/* ", 4);
 	OfrontOPM_WriteString((CHAR*)"Ofront+ 0.9 -", 14);
-	i = 0;
-	while (i <= 31) {
-		if (__IN(i, OfrontOPM_glbopt)) {
-			switch (i) {
-				case 9: 
-					OfrontOPM_Write('e');
-					break;
-				case 4: 
-					OfrontOPM_Write('s');
-					break;
-				case 10: 
-					OfrontOPM_Write('m');
-					break;
-				case 0: 
-					OfrontOPM_Write('x');
-					break;
-				case 1: 
-					OfrontOPM_Write('v');
-					break;
-				case 2: 
-					OfrontOPM_Write('r');
-					break;
-				case 3: 
-					OfrontOPM_Write('t');
-					break;
-				case 7: 
-					OfrontOPM_Write('a');
-					break;
-				case 6: 
-					OfrontOPM_Write('k');
-					break;
-				case 5: 
-					OfrontOPM_Write('p');
-					break;
-				case 8: 
-					OfrontOPM_Write('i');
-					break;
-				case 11: 
-					break;
-				case 12: 
-					OfrontOPM_Write('1');
-					break;
-				case 13: 
-					OfrontOPM_Write('2');
-					break;
-				case 14: 
-					OfrontOPM_Write('c');
-					break;
-				case 15: 
-					OfrontOPM_Write('7');
-					break;
-				default: __CASECHK;
-			}
-		}
-		i += 1;
+	if (__IN(9, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('e');
+	}
+	if (__IN(4, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('s');
+	}
+	if (__IN(10, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('m');
+	}
+	if (!__IN(0, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('x');
+	}
+	if (__IN(1, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('v');
+	}
+	if (__IN(2, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('r');
+	}
+	if (!__IN(3, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('t');
+	}
+	if (!__IN(7, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('a');
+	}
+	if (!__IN(6, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('k');
+	}
+	if (!__IN(5, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('p');
+	}
+	if (__IN(8, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('i');
+	}
+	if (__IN(12, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('1');
+	}
+	if (__IN(13, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('2');
+	}
+	if (__IN(14, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('C');
+	}
+	if (__IN(15, OfrontOPM_glbopt)) {
+		OfrontOPM_Write('7');
 	}
 	OfrontOPM_WriteString((CHAR*)" */", 4);
 	OfrontOPM_WriteLn();

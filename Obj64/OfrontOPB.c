@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -e */
 #include "SYSTEM.h"
 #include "OfrontOPM.h"
 #include "OfrontOPS.h"
@@ -1175,7 +1175,7 @@ static void OfrontOPB_Convert (OfrontOPT_Node *x, OfrontOPT_Struct typ)
 				OfrontOPB_CheckRealType(g, 203, (*x)->conval);
 			} else {
 				r = (*x)->conval->realval;
-				if (r < -9.223372036854776E+18 || r > 9.223372036854776E+18) {
+				if (r <  -9.22337203685478e+018 || r >   9.22337203685478e+018) {
 					OfrontOPB_err(203);
 					r = (LONGREAL)1;
 				}
@@ -2264,14 +2264,20 @@ void OfrontOPB_StPar1 (OfrontOPT_Node *par0, OfrontOPT_Node x, SHORTINT fctno)
 			if (((x->class == 8 || x->class == 9) || __IN(f, 0x1401)) || x->typ->comp == 3) {
 				OfrontOPB_err(126);
 			}
+			(*OfrontOPT_typSize)(x->typ);
+			(*OfrontOPT_typSize)(p->typ);
 			if (x->class != 7 && x->typ->size < p->typ->size) {
 				OfrontOPB_err(-308);
 			}
-			t = OfrontOPT_NewNode(11);
-			t->subcl = 29;
-			t->left = x;
-			x = t;
-			x->typ = p->typ;
+			if ((x->class == 7 && __IN(x->typ->form, 0x72)) && __IN(p->typ->form, 0x72)) {
+				OfrontOPB_Convert(&x, p->typ);
+			} else {
+				t = OfrontOPT_NewNode(11);
+				t->subcl = 29;
+				t->left = x;
+				x = t;
+				x->typ = p->typ;
+			}
 			p = x;
 			break;
 		case 30: 
