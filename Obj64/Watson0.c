@@ -745,7 +745,7 @@ static void Watson0_Commands (Files_File F, CHAR *modName, INTEGER modName__len)
 	Files_ReadChar(&R, Files_Rider__typ, &ch);
 	Files_ReadNum(&R, Files_Rider__typ, &symSize);
 	Files_Set(&R, Files_Rider__typ, F, Files_Pos(&R, Files_Rider__typ) + symSize);
-	Files_ReadBytes(&R, Files_Rider__typ, (void*)&ref, 4, 4);
+	Files_ReadBytes(&R, Files_Rider__typ, (void*)&ref, 8, 4);
 	Files_ReadBytes(&R, Files_Rider__typ, (void*)&nofentry, 4, 2);
 	Files_ReadBytes(&R, Files_Rider__typ, (void*)&nofcmds, 4, 2);
 	Files_Set(&R, Files_Rider__typ, F, Files_Pos(&R, Files_Rider__typ) + 18);
@@ -890,7 +890,7 @@ void Watson0_ShowCmd (CHAR *file, INTEGER file__len, Texts_Text T)
 /*----------------------------------------------------------------------------*/
 static void EnumPtrs(void (*P)(void*))
 {
-	__ENUMR(&Watson0_W, Texts_Writer__typ, 36, 1, P);
+	__ENUMR(&Watson0_W, Texts_Writer__typ, 64, 1, P);
 	P(Watson0_curObj);
 }
 
