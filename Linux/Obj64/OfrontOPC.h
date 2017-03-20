@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 - */
 
 #ifndef OfrontOPC__h
 #define OfrontOPC__h
@@ -38,6 +38,7 @@ import void OfrontOPC_Indent (INTEGER count);
 import void OfrontOPC_Init (void);
 import void OfrontOPC_InitTDesc (OfrontOPT_Struct typ);
 import void OfrontOPC_Len (OfrontOPT_Object obj, OfrontOPT_Struct array, LONGINT dim);
+import BOOLEAN OfrontOPC_NeedsRetval (OfrontOPT_Object proc);
 import LONGINT OfrontOPC_NofPtrs (OfrontOPT_Struct typ);
 import void OfrontOPC_SetInclude (BOOLEAN exclude);
 import void OfrontOPC_TDescDecl (OfrontOPT_Struct typ);

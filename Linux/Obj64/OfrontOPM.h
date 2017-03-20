@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 - */
 
 #ifndef OfrontOPM__h
 #define OfrontOPM__h
@@ -6,7 +6,7 @@
 #include "SYSTEM.h"
 
 
-import INTEGER OfrontOPM_ByteSize, OfrontOPM_CharSize, OfrontOPM_BoolSize, OfrontOPM_SIntSize, OfrontOPM_IntSize, OfrontOPM_LIntSize, OfrontOPM_SetSize, OfrontOPM_RealSize, OfrontOPM_LRealSize, OfrontOPM_PointerSize, OfrontOPM_ProcSize, OfrontOPM_RecSize, OfrontOPM_ArrLenSize, OfrontOPM_CharAlign, OfrontOPM_BoolAlign, OfrontOPM_SIntAlign, OfrontOPM_IntAlign, OfrontOPM_LIntAlign, OfrontOPM_SetAlign, OfrontOPM_RealAlign, OfrontOPM_LRealAlign, OfrontOPM_PointerAlign, OfrontOPM_ProcAlign, OfrontOPM_RecAlign, OfrontOPM_ByteOrder, OfrontOPM_BitOrder, OfrontOPM_MaxSet, OfrontOPM_MinSInt, OfrontOPM_MinInt, OfrontOPM_MaxSInt, OfrontOPM_MaxInt, OfrontOPM_MaxIndex;
+import INTEGER OfrontOPM_ByteSize, OfrontOPM_CharSize, OfrontOPM_BoolSize, OfrontOPM_SIntSize, OfrontOPM_IntSize, OfrontOPM_LIntSize, OfrontOPM_SetSize, OfrontOPM_RealSize, OfrontOPM_LRealSize, OfrontOPM_PointerSize, OfrontOPM_ProcSize, OfrontOPM_RecSize, OfrontOPM_ArrLenSize, OfrontOPM_CharAlign, OfrontOPM_BoolAlign, OfrontOPM_SIntAlign, OfrontOPM_IntAlign, OfrontOPM_LIntAlign, OfrontOPM_SetAlign, OfrontOPM_RealAlign, OfrontOPM_LRealAlign, OfrontOPM_PointerAlign, OfrontOPM_ProcAlign, OfrontOPM_RecAlign, OfrontOPM_ByteOrder, OfrontOPM_BitOrder, OfrontOPM_MaxSet, OfrontOPM_MaxHDig, OfrontOPM_MinSInt, OfrontOPM_MinInt, OfrontOPM_MaxSInt, OfrontOPM_MaxInt, OfrontOPM_MaxIndex;
 import LONGINT OfrontOPM_MinLInt, OfrontOPM_MaxLInt;
 import LONGREAL OfrontOPM_MinReal, OfrontOPM_MaxReal, OfrontOPM_MinLReal, OfrontOPM_MaxLReal;
 import BOOLEAN OfrontOPM_noerr;
@@ -28,7 +28,7 @@ import void OfrontOPM_FPrintLReal (LONGINT *fp, LONGREAL lr);
 import void OfrontOPM_FPrintReal (LONGINT *fp, REAL real);
 import void OfrontOPM_FPrintSet (LONGINT *fp, SET set);
 import void OfrontOPM_Get (CHAR *ch);
-import void OfrontOPM_Init (BOOLEAN *done);
+import void OfrontOPM_Init (CHAR *msg, INTEGER msg__len, BOOLEAN *done);
 import void OfrontOPM_InitOptions (void);
 import void OfrontOPM_LogW (CHAR ch);
 import void OfrontOPM_LogWLn (void);
@@ -38,7 +38,7 @@ import void OfrontOPM_Mark (INTEGER n, LONGINT pos1);
 import void OfrontOPM_NewSym (CHAR *modName, INTEGER modName__len);
 import void OfrontOPM_OldSym (CHAR *modName, INTEGER modName__len, BOOLEAN *done);
 import void OfrontOPM_OpenFiles (CHAR *moduleName, INTEGER moduleName__len);
-import void OfrontOPM_OpenPar (void);
+import void OfrontOPM_OpenPar (CHAR *title, INTEGER title__len, CHAR *cmd, INTEGER cmd__len);
 import void OfrontOPM_PromoteIntConstToLInt (void);
 import void OfrontOPM_RegisterNewSym (void);
 import void OfrontOPM_SymRCh (CHAR *ch);

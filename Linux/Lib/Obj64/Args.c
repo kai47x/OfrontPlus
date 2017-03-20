@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 - */
 #include "SYSTEM.h"
 #include "Platform.h"
 
@@ -12,6 +12,10 @@ export void Args_GetEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER val__le
 export void Args_GetInt (INTEGER n, INTEGER *val);
 export INTEGER Args_Pos (CHAR *s, INTEGER s__len);
 
+extern INTEGER SYSTEM_ArgCount;
+extern void *SYSTEM_ArgVector;
+#define Args_ArgCount()	SYSTEM_ArgCount
+#define Args_ArgVector()	(Platform_ArgVec)SYSTEM_ArgVector
 
 /*============================================================================*/
 
@@ -46,7 +50,7 @@ export void *Args__init(void)
 	__IMPORT(Platform__init);
 	__REGMOD("Args", 0);
 /* BEGIN */
-	Args_argc = Platform_ArgCount;
-	Args_argv = Platform_ArgVector;
+	Args_argc = Args_ArgCount();
+	Args_argv = Args_ArgVector();
 	__ENDMOD;
 }

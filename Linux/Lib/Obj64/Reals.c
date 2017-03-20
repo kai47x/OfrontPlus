@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 - */
 #include "SYSTEM.h"
 #include "Platform.h"
 
@@ -18,8 +18,8 @@ export LONGREAL Reals_TenL (SHORTINT e);
 static void Reals_Unpack (BYTE *b, INTEGER b__len, BYTE *d, INTEGER d__len);
 
 #include <stdlib.h>
-#define Reals_Offset(adr, offset)	((Platform_MemAdr)((SYSTEM_ADR)adr + offset))
-#define Reals_ecvt(x, ndigit, decpt, sign)	((Platform_MemAdr)ecvt (x, ndigit, (int*)(decpt), (int*)(sign)))
+#define Reals_Offset(adr, offset)	((Platform_ADR)((SYSTEM_ADR)adr + offset))
+#define Reals_ecvt(x, ndigit, decpt, sign)	((Platform_ADR)ecvt (x, ndigit, (int*)(decpt), (int*)(sign)))
 
 /*============================================================================*/
 
@@ -103,7 +103,7 @@ void Reals_Convert (REAL x, SHORTINT n, CHAR *d, INTEGER d__len)
 void Reals_ConvertL (LONGREAL x, SHORTINT n, CHAR *d, INTEGER d__len)
 {
 	INTEGER decpt, sign, i;
-	Platform_MemAdr buf = NIL;
+	Platform_ADR buf = NIL;
 	buf = Reals_ecvt(x, n + 2, &decpt, &sign);
 	i = 0;
 	while (i < decpt) {

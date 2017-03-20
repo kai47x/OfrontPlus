@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 - */
 
 #ifndef ooc2RandomNumbers__h
 #define ooc2RandomNumbers__h

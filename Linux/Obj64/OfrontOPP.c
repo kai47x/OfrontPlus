@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 - */
 #include "SYSTEM.h"
 #include "OfrontOPB.h"
 #include "OfrontOPM.h"
@@ -19,7 +19,7 @@ static OfrontOPT_Node OfrontOPP_TDinit, OfrontOPP_lastTDinit;
 static INTEGER OfrontOPP_nofFwdPtr;
 static OfrontOPT_Struct OfrontOPP_FwdPtr[64];
 
-export LONGINT *OfrontOPP__1__typ;
+export SYSTEM_ADR *OfrontOPP__1__typ;
 
 static void OfrontOPP_ActualParameters (OfrontOPT_Node *aparlist, OfrontOPT_Object fpar);
 static void OfrontOPP_ArrayType (OfrontOPT_Struct *typ, OfrontOPT_Struct *banned);
@@ -1114,7 +1114,7 @@ static void OfrontOPP_ProcedureDeclaration (OfrontOPT_Node *x)
 		}
 		OfrontOPS_Get(&OfrontOPP_sym);
 	}
-	if (OfrontOPP_sym == 30) {
+	if ((OfrontOPP_sym == 30 && !__IN(12, OfrontOPM_opt)) && !__IN(15, OfrontOPM_opt)) {
 		TProcDecl__23();
 	} else if (OfrontOPP_sym == 38) {
 		OfrontOPT_Find(&fwd);

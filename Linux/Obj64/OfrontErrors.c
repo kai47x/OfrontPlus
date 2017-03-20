@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 - */
 #include "SYSTEM.h"
 #include "Console.h"
 
@@ -480,6 +480,9 @@ void OfrontErrors_LogErrMsg (INTEGER n)
 			break;
 		case 306: 
 			Console_String((CHAR*)"inappropriate symbol file ignored", 34);
+			break;
+		case 308: 
+			Console_String((CHAR*)"SYSTEM.VAL result includes memory past end of source variable", 62);
 			break;
 		default: __CASECHK;
 	}

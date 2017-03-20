@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtpkaem */
+/* Ofront+ 0.9 -m */
 #include "SYSTEM.h"
 #include "Args.h"
 #include "Console.h"
