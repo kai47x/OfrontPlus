@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -e */
 #include "SYSTEM.h"
 
 typedef
@@ -11,7 +11,7 @@ typedef
 
 
 
-export LONGINT *ooc2ConvTypes_ScanDesc__typ;
+export SYSTEM_ADR *ooc2ConvTypes_ScanDesc__typ;
 
 
 

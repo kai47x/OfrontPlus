@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -s */
 #include "SYSTEM.h"
 #include "Platform.h"
 

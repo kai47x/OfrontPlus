@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -ske */
+/* Ofront+ 0.9 -s */
 #include "SYSTEM.h"
 
 typedef
@@ -27,7 +27,7 @@ export INTEGER Platform_SeekSet, Platform_SeekCur, Platform_SeekEnd;
 export Platform_FileHandle Platform_StdIn, Platform_StdOut, Platform_StdErr;
 export CHAR Platform_newLine[3];
 
-export LONGINT *Platform_FileIdentity__typ;
+export SYSTEM_ADR *Platform_FileIdentity__typ;
 
 export BOOLEAN Platform_Absent (INTEGER e);
 export INTEGER Platform_ArgPos (CHAR *s, INTEGER s__len);
@@ -44,8 +44,8 @@ export void Platform_GetArg (INTEGER n, CHAR *val, INTEGER val__len);
 export void Platform_GetClock (INTEGER *t, INTEGER *d);
 export void Platform_GetEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER val__len);
 export void Platform_GetIntArg (INTEGER n, INTEGER *val);
-export INTEGER Platform_Identify (Platform_FileHandle h, Platform_FileIdentity *identity, LONGINT *identity__typ);
-export INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, LONGINT *identity__typ);
+export INTEGER Platform_Identify (Platform_FileHandle h, Platform_FileIdentity *identity, SYSTEM_ADR *identity__typ);
+export INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, SYSTEM_ADR *identity__typ);
 export BOOLEAN Platform_Inaccessible (INTEGER e);
 export void Platform_MTimeAsClock (Platform_FileIdentity i, INTEGER *t, INTEGER *d);
 export INTEGER Platform_NewFile (CHAR *n, INTEGER n__len, Platform_FileHandle *h);
@@ -60,7 +60,7 @@ export INTEGER Platform_RenameFile (CHAR *o, INTEGER o__len, CHAR *n, INTEGER n_
 export BOOLEAN Platform_SameFile (Platform_FileIdentity i1, Platform_FileIdentity i2);
 export BOOLEAN Platform_SameFileTime (Platform_FileIdentity i1, Platform_FileIdentity i2);
 export INTEGER Platform_Seek (Platform_FileHandle h, LONGINT o, INTEGER r);
-export void Platform_SetMTime (Platform_FileIdentity *target, LONGINT *target__typ, Platform_FileIdentity source);
+export void Platform_SetMTime (Platform_FileIdentity *target, SYSTEM_ADR *target__typ, Platform_FileIdentity source);
 export INTEGER Platform_Sync (Platform_FileHandle h);
 export INTEGER Platform_System (CHAR *cmd, INTEGER cmd__len);
 static void Platform_TestLittleEndian (void);
@@ -403,7 +403,7 @@ INTEGER Platform_CloseFile (Platform_FileHandle h)
 }
 
 /*----------------------------------------------------------------------------*/
-INTEGER Platform_Identify (Platform_FileHandle h, Platform_FileIdentity *identity, LONGINT *identity__typ)
+INTEGER Platform_Identify (Platform_FileHandle h, Platform_FileIdentity *identity, SYSTEM_ADR *identity__typ)
 {
 	Platform_byHandleFileInformation();
 	if (Platform_getFileInformationByHandle(h) == 0) {
@@ -418,7 +418,7 @@ INTEGER Platform_Identify (Platform_FileHandle h, Platform_FileIdentity *identit
 }
 
 /*----------------------------------------------------------------------------*/
-INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, LONGINT *identity__typ)
+INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, SYSTEM_ADR *identity__typ)
 {
 	Platform_FileHandle h;
 	INTEGER e, i;
@@ -447,7 +447,7 @@ BOOLEAN Platform_SameFileTime (Platform_FileIdentity i1, Platform_FileIdentity i
 }
 
 /*----------------------------------------------------------------------------*/
-void Platform_SetMTime (Platform_FileIdentity *target, LONGINT *target__typ, Platform_FileIdentity source)
+void Platform_SetMTime (Platform_FileIdentity *target, SYSTEM_ADR *target__typ, Platform_FileIdentity source)
 {
 	(*target).mtimehigh = source.mtimehigh;
 	(*target).mtimelow = source.mtimelow;

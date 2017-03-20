@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -s */
 
 #ifndef WinApi__h
 #define WinApi__h
@@ -26,9 +26,9 @@ typedef
 
 
 
-import LONGINT *WinApi_SECURITY_ATTRIBUTES__typ;
-import LONGINT *WinApi_FILETIME__typ;
-import LONGINT *WinApi_BY_HANDLE_FILE_INFORMATION__typ;
+import SYSTEM_ADR *WinApi_SECURITY_ATTRIBUTES__typ;
+import SYSTEM_ADR *WinApi_FILETIME__typ;
+import SYSTEM_ADR *WinApi_BY_HANDLE_FILE_INFORMATION__typ;
 
 import void *WinApi__init(void);
 

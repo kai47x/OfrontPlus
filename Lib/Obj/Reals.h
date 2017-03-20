@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -s */
 
 #ifndef Reals__h
 #define Reals__h

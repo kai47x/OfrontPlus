@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -s */
 
 #ifndef Console__h
 #define Console__h

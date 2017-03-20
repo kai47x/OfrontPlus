@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -s */
 #include "SYSTEM.h"
 #include "Args.h"
 #include "Console.h"
@@ -21,7 +21,7 @@ static Texts_Reader Oberon_R;
 static Texts_Writer Oberon_W;
 export CHAR Oberon_OptionChar;
 
-export LONGINT *Oberon_ParRec__typ;
+export SYSTEM_ADR *Oberon_ParRec__typ;
 
 export void Oberon_GetClock (INTEGER *t, INTEGER *d);
 export void Oberon_GetSelection (Texts_Text *text, INTEGER *beg, INTEGER *end, INTEGER *time);

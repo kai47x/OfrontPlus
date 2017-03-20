@@ -1,5 +1,6 @@
-/* Ofront+ 0.9 -ske */
+/* Ofront+ 0.9 -s */
 #include "SYSTEM.h"
+#include "Heap.h"
 #include "Console.h"
 #include "Platform.h"
 
@@ -17,23 +18,18 @@ export void Kernel_AssertFail (INTEGER code);
 static void Kernel_DisplayHaltCode (INTEGER code);
 export void Kernel_Exit (INTEGER code);
 export void Kernel_Halt (INTEGER code);
-export void Kernel_SetBadInstructionHandler (Kernel_SignalHandler handler);
 export void Kernel_SetHalt (Kernel_HaltProcedure p);
 
 extern void (*SYSTEM_AssertFailHandler)(INTEGER code);
 extern void (*SYSTEM_HaltHandler)(INTEGER code);
 #define Kernel_SetAssertFail(p)	SYSTEM_AssertFailHandler = p
+#define Kernel_SetBadInstructionHandler(h)	SystemSetBadInstructionHandler((SYSTEM_ADR)h)
 #define Kernel_SetHaltHandler(p)	SYSTEM_HaltHandler = p
 #define Kernel_SetInterruptHandler(h)	SystemSetInterruptHandler((SYSTEM_ADR)h)
 #define Kernel_SetQuitHandler(h)	SystemSetQuitHandler((SYSTEM_ADR)h)
 
 /*============================================================================*/
 
-void Kernel_SetBadInstructionHandler (Kernel_SignalHandler handler)
-{
-}
-
-/*----------------------------------------------------------------------------*/
 static void Kernel_DisplayHaltCode (INTEGER code)
 {
 	switch (code) {
@@ -80,6 +76,7 @@ static void Kernel_DisplayHaltCode (INTEGER code)
 
 void Kernel_Halt (INTEGER code)
 {
+	Heap_FINALL();
 	Kernel_HaltCode = code;
 	Console_String((CHAR*)"Terminated by Halt(", 20);
 	Console_Int(code, 0);
@@ -94,6 +91,7 @@ void Kernel_Halt (INTEGER code)
 /*----------------------------------------------------------------------------*/
 void Kernel_AssertFail (INTEGER code)
 {
+	Heap_FINALL();
 	Console_String((CHAR*)"Assertion failure.", 19);
 	if (code != 0) {
 		Console_String((CHAR*)" ASSERT code ", 14);
@@ -121,6 +119,7 @@ void Kernel_SetHalt (Kernel_HaltProcedure p)
 export void *Kernel__init(void)
 {
 	__DEFMOD;
+	__IMPORT(Heap__init);
 	__IMPORT(Console__init);
 	__IMPORT(Platform__init);
 	__REGMOD("Kernel", 0);
