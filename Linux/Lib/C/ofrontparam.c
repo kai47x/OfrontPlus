@@ -6,7 +6,6 @@ The output of this program is accepted by Ofront as file Ofront.par.
 */
 
 #include <stdio.h>
-#include <string.h>
 #include "SYSTEM.h"
 
 struct {CHAR ch; CHAR x;} c;
@@ -50,11 +49,11 @@ int main()
 		printf("error: unsupported record layout  sizeof rec0 = %d  sizeof rec2 = %d\n", sizeof rec0, sizeof rec2);
 
 	/* test the __ASHR macro */
-	if (__ASHR(-1, 1, LONGINT) != -1) printf("error: ASH(-1, -1) # -1\n");
-	if (__ASHR(-2, 1, LONGINT) != -1) printf("error: ASH(-2, -1) # -1\n");
-	if (__ASHR(0, 1, LONGINT) != 0) printf("error: ASH(0, 1) #  0\n");
-	if (__ASHR(1, 1, LONGINT) != 0) printf("error: ASH(1, 1) #  0\n");
-	if (__ASHR(2, 1, LONGINT) != 1) printf("error: ASH(2, 1) #  1\n");
+	if (__ASHR(-1, 1) != -1) printf("error: ASH(-1, -1) # -1\n");
+	if (__ASHR(-2, 1) != -1) printf("error: ASH(-2, -1) # -1\n");
+	if (__ASHR(0, 1) != 0) printf("error: ASH(0, 1) #  0\n");
+	if (__ASHR(1, 1) != 0) printf("error: ASH(1, 1) #  0\n");
+	if (__ASHR(2, 1) != 1) printf("error: ASH(2, 1) #  1\n");
 
 	/* test the __SETRNG macro */
 	x = 0; y = sizeof(SET)*8 - 1;
