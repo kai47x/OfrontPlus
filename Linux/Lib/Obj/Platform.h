@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -es */
 
 #ifndef Platform__h
 #define Platform__h
@@ -27,7 +27,7 @@ import CHAR Platform_CWD[256];
 import INTEGER Platform_SeekSet, Platform_SeekCur, Platform_SeekEnd;
 import CHAR Platform_newLine[2];
 
-import LONGINT *Platform_FileIdentity__typ;
+import SYSTEM_ADR *Platform_FileIdentity__typ;
 
 import BOOLEAN Platform_Absent (INTEGER e);
 import INTEGER Platform_ArgPos (CHAR *s, INTEGER s__len);
@@ -44,8 +44,8 @@ import void Platform_GetArg (INTEGER n, CHAR *val, INTEGER val__len);
 import void Platform_GetClock (INTEGER *t, INTEGER *d);
 import void Platform_GetEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER val__len);
 import void Platform_GetIntArg (INTEGER n, INTEGER *val);
-import INTEGER Platform_Identify (INTEGER h, Platform_FileIdentity *identity, LONGINT *identity__typ);
-import INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, LONGINT *identity__typ);
+import INTEGER Platform_Identify (INTEGER h, Platform_FileIdentity *identity, SYSTEM_ADR *identity__typ);
+import INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, SYSTEM_ADR *identity__typ);
 import BOOLEAN Platform_Inaccessible (INTEGER e);
 import void Platform_MTimeAsClock (Platform_FileIdentity i, INTEGER *t, INTEGER *d);
 import INTEGER Platform_NewFile (CHAR *n, INTEGER n__len, INTEGER *h);
@@ -60,7 +60,7 @@ import INTEGER Platform_RenameFile (CHAR *o, INTEGER o__len, CHAR *n, INTEGER n_
 import BOOLEAN Platform_SameFile (Platform_FileIdentity i1, Platform_FileIdentity i2);
 import BOOLEAN Platform_SameFileTime (Platform_FileIdentity i1, Platform_FileIdentity i2);
 import INTEGER Platform_Seek (INTEGER h, LONGINT offset, INTEGER whence);
-import void Platform_SetMTime (Platform_FileIdentity *target, LONGINT *target__typ, Platform_FileIdentity source);
+import void Platform_SetMTime (Platform_FileIdentity *target, SYSTEM_ADR *target__typ, Platform_FileIdentity source);
 import INTEGER Platform_Sync (INTEGER h);
 import INTEGER Platform_System (CHAR *cmd, INTEGER cmd__len);
 import INTEGER Platform_Time (void);

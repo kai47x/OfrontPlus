@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -es */
 #include "SYSTEM.h"
 #include "OfrontOPB.h"
 #include "OfrontOPM.h"
@@ -19,7 +19,7 @@ static OfrontOPT_Node OfrontOPP_TDinit, OfrontOPP_lastTDinit;
 static INTEGER OfrontOPP_nofFwdPtr;
 static OfrontOPT_Struct OfrontOPP_FwdPtr[64];
 
-export LONGINT *OfrontOPP__1__typ;
+export SYSTEM_ADR *OfrontOPP__1__typ;
 
 static void OfrontOPP_ActualParameters (OfrontOPT_Node *aparlist, OfrontOPT_Object fpar);
 static void OfrontOPP_ArrayType (OfrontOPT_Struct *typ, OfrontOPT_Struct *banned);

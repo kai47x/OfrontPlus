@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -es */
 
 #ifndef ooc2ConvTypes__h
 #define ooc2ConvTypes__h
@@ -15,7 +15,7 @@ typedef
 
 
 
-import LONGINT *ooc2ConvTypes_ScanDesc__typ;
+import SYSTEM_ADR *ooc2ConvTypes_ScanDesc__typ;
 
 import void *ooc2ConvTypes__init(void);
 

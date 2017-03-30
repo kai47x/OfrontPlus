@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -es */
 #include "SYSTEM.h"
 #include "Platform.h"
 
@@ -60,7 +60,7 @@ void Console_Int (INTEGER i, INTEGER n)
 {
 	CHAR s[16];
 	INTEGER i1, k;
-	if (i == __LSHL((INTEGER)1, 31, INTEGER)) {
+	if (i == __LSHL(1, 31, INTEGER)) {
 		__MOVE("8463847412", s, 11);
 		k = 10;
 	} else {
@@ -94,7 +94,7 @@ void Console_LongInt (LONGINT i, INTEGER n)
 	CHAR s[24];
 	LONGINT i1;
 	INTEGER k;
-	if (i == __LSHL((LONGINT)1, 31, LONGINT)) {
+	if (i == __LSHL(1, 31, LONGINT)) {
 		__MOVE("8463847412", s, 11);
 		k = 10;
 	} else {

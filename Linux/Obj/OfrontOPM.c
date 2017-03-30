@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -es */
 #include "SYSTEM.h"
 #include "Args.h"
 #include "Console.h"
@@ -35,7 +35,7 @@ static BOOLEAN OfrontOPM_stop, OfrontOPM_useLineNo;
 static CHAR OfrontOPM_OBERON[1024];
 
 
-static void OfrontOPM_Append (Files_Rider *R, LONGINT *R__typ, Files_File F);
+static void OfrontOPM_Append (Files_Rider *R, SYSTEM_ADR *R__typ, Files_File F);
 export void OfrontOPM_CloseFiles (void);
 export void OfrontOPM_CloseOldSym (void);
 export void OfrontOPM_DeleteNewSym (void);
@@ -45,8 +45,8 @@ export void OfrontOPM_FPrintReal (LONGINT *fp, REAL real);
 export void OfrontOPM_FPrintSet (LONGINT *fp, SET set);
 export void OfrontOPM_Get (CHAR *ch);
 static void OfrontOPM_GetProperties (void);
-static void OfrontOPM_GetProperty (Texts_Scanner *S, LONGINT *S__typ, CHAR *name, INTEGER name__len, INTEGER *size, INTEGER *align);
-static void OfrontOPM_GetProperty1 (Texts_Scanner *S, LONGINT *S__typ, CHAR *name, INTEGER name__len, INTEGER *par, INTEGER defval);
+static void OfrontOPM_GetProperty (Texts_Scanner *S, SYSTEM_ADR *S__typ, CHAR *name, INTEGER name__len, INTEGER *size, INTEGER *align);
+static void OfrontOPM_GetProperty1 (Texts_Scanner *S, SYSTEM_ADR *S__typ, CHAR *name, INTEGER name__len, INTEGER *par, INTEGER defval);
 export void OfrontOPM_Init (CHAR *msg, INTEGER msg__len, BOOLEAN *done);
 export void OfrontOPM_InitOptions (void);
 static void OfrontOPM_LogErrMsg (INTEGER n);
@@ -160,7 +160,7 @@ static void OfrontOPM_ScanOptions (CHAR *s, INTEGER s__len, SET *opt)
 			case '2': 
 				*opt = (((*opt | 0x2000) & ~0x1000) & ~0x4000) & ~0x8000;
 				break;
-			case 'c': 
+			case 'C': 
 				*opt = (((*opt | 0x4000) & ~0x1000) & ~0x2000) & ~0x8000;
 				break;
 			case '7': 
@@ -201,11 +201,9 @@ void OfrontOPM_OpenPar (CHAR *title, INTEGER title__len, CHAR *cmd, INTEGER cmd_
 		Console_Ln();
 		Console_String((CHAR*)"  option  = \"m\" | \"s\" | \"e\" | \"i\" | \"l\" | \"k\" | \"r\" | \"x\" | \"a\" | \"p\" | \"t\"", 76);
 		Console_Ln();
-		Console_String((CHAR*)"            \"1\" Oberon | \"2\" Oberon-2 | \"c\" Component Pascal | \"7\" Oberon-07", 77);
-		Console_Ln();
 	} else {
 		OfrontOPM_GetProperties();
-		OfrontOPM_glbopt = 0x0af9;
+		OfrontOPM_glbopt = 0x08e9;
 		OfrontOPM_S = 1;
 		s[0] = 0x00;
 		Args_Get(1, (void*)s, 256);
@@ -482,7 +480,7 @@ void OfrontOPM_FPrintLReal (LONGINT *fp, LONGREAL lr)
 }
 
 /*----------------------------------------------------------------------------*/
-static void OfrontOPM_GetProperty (Texts_Scanner *S, LONGINT *S__typ, CHAR *name, INTEGER name__len, INTEGER *size, INTEGER *align)
+static void OfrontOPM_GetProperty (Texts_Scanner *S, SYSTEM_ADR *S__typ, CHAR *name, INTEGER name__len, INTEGER *size, INTEGER *align)
 {
 	__DUP(name, name__len);
 	if ((*S).class == 1 && __STRCMP((*S).s, name) == 0) {
@@ -505,7 +503,7 @@ static void OfrontOPM_GetProperty (Texts_Scanner *S, LONGINT *S__typ, CHAR *name
 	__DEL(name);
 }
 
-static void OfrontOPM_GetProperty1 (Texts_Scanner *S, LONGINT *S__typ, CHAR *name, INTEGER name__len, INTEGER *par, INTEGER defval)
+static void OfrontOPM_GetProperty1 (Texts_Scanner *S, SYSTEM_ADR *S__typ, CHAR *name, INTEGER name__len, INTEGER *par, INTEGER defval)
 {
 	__DUP(name, name__len);
 	if ((*S).class == 1 && __STRCMP((*S).s, name) == 0) {
@@ -602,7 +600,7 @@ static void OfrontOPM_GetProperties (void)
 	}
 	if (OfrontOPM_LIntSize == 8) {
 		base = 63;
-		OfrontOPM_MinLInt = __LSH((LONGINT)1, base, LONGINT);
+		OfrontOPM_MinLInt = __LSH(1, base, LONGINT);
 		OfrontOPM_MaxLInt = -(OfrontOPM_MinLInt + 1);
 	}
 	OfrontOPM_MaxSet = __ASHL(OfrontOPM_SetSize, 3, INTEGER) - 1;
@@ -870,7 +868,7 @@ void OfrontOPM_WriteLn (void)
 }
 
 /*----------------------------------------------------------------------------*/
-static void OfrontOPM_Append (Files_Rider *R, LONGINT *R__typ, Files_File F)
+static void OfrontOPM_Append (Files_Rider *R, SYSTEM_ADR *R__typ, Files_File F)
 {
 	Files_Rider R1;
 	CHAR buffer[4096];

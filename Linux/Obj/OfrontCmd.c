@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkaem */
+/* Ofront+ 0.9 -esm */
 #include "SYSTEM.h"
 #include "Heap.h"
 #include "Kernel.h"
@@ -95,7 +95,6 @@ void OfrontCmd_Translate (void)
 			break;
 		}
 		OfrontOPM_InitOptions();
-		Heap_GC(0);
 		OfrontCmd_Module(&done);
 		if (!done) {
 			Heap_FINALL();

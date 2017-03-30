@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -es */
 
 #ifndef Modules__h
 #define Modules__h
@@ -40,8 +40,8 @@ import INTEGER Modules_res;
 import CHAR Modules_resMsg[256];
 import Modules_ModuleName Modules_imported, Modules_importing;
 
-import LONGINT *Modules_ModuleDesc__typ;
-import LONGINT *Modules_CmdDesc__typ;
+import SYSTEM_ADR *Modules_ModuleDesc__typ;
+import SYSTEM_ADR *Modules_CmdDesc__typ;
 
 import void Modules_Free (CHAR *name, INTEGER name__len, BOOLEAN all);
 import Modules_Command Modules_ThisCommand (Modules_Module mod, CHAR *name, INTEGER name__len);

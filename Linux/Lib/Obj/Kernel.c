@@ -1,5 +1,6 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -es */
 #include "SYSTEM.h"
+#include "Heap.h"
 #include "Console.h"
 #include "Platform.h"
 
@@ -75,6 +76,7 @@ static void Kernel_DisplayHaltCode (INTEGER code)
 
 void Kernel_Halt (INTEGER code)
 {
+	Heap_FINALL();
 	Kernel_HaltCode = code;
 	Console_String((CHAR*)"Terminated by Halt(", 20);
 	Console_Int(code, 0);
@@ -89,6 +91,7 @@ void Kernel_Halt (INTEGER code)
 /*----------------------------------------------------------------------------*/
 void Kernel_AssertFail (INTEGER code)
 {
+	Heap_FINALL();
 	Console_String((CHAR*)"Assertion failure.", 19);
 	if (code != 0) {
 		Console_String((CHAR*)" ASSERT code ", 14);
@@ -116,6 +119,7 @@ void Kernel_SetHalt (Kernel_HaltProcedure p)
 export void *Kernel__init(void)
 {
 	__DEFMOD;
+	__IMPORT(Heap__init);
 	__IMPORT(Console__init);
 	__IMPORT(Platform__init);
 	__REGMOD("Kernel", 0);

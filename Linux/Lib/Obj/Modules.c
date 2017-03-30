@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -es */
 #include "SYSTEM.h"
 #include "Console.h"
 #include "Heap.h"
@@ -38,8 +38,8 @@ export INTEGER Modules_res;
 export CHAR Modules_resMsg[256];
 export Modules_ModuleName Modules_imported, Modules_importing;
 
-export LONGINT *Modules_ModuleDesc__typ;
-export LONGINT *Modules_CmdDesc__typ;
+export SYSTEM_ADR *Modules_ModuleDesc__typ;
+export SYSTEM_ADR *Modules_CmdDesc__typ;
 
 static void Modules_Append (CHAR *a, INTEGER a__len, CHAR *b, INTEGER b__len);
 export void Modules_Free (CHAR *name, INTEGER name__len, BOOLEAN all);

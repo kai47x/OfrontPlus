@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -xtspkae */
+/* Ofront+ 0.9 -es */
 #include "SYSTEM.h"
 
 typedef
@@ -34,7 +34,7 @@ static INTEGER Platform_TimeStart;
 export INTEGER Platform_SeekSet, Platform_SeekCur, Platform_SeekEnd;
 export CHAR Platform_newLine[2];
 
-export LONGINT *Platform_FileIdentity__typ;
+export SYSTEM_ADR *Platform_FileIdentity__typ;
 
 export BOOLEAN Platform_Absent (INTEGER e);
 export INTEGER Platform_ArgPos (CHAR *s, INTEGER s__len);
@@ -51,8 +51,8 @@ export void Platform_GetArg (INTEGER n, CHAR *val, INTEGER val__len);
 export void Platform_GetClock (INTEGER *t, INTEGER *d);
 export void Platform_GetEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER val__len);
 export void Platform_GetIntArg (INTEGER n, INTEGER *val);
-export INTEGER Platform_Identify (INTEGER h, Platform_FileIdentity *identity, LONGINT *identity__typ);
-export INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, LONGINT *identity__typ);
+export INTEGER Platform_Identify (INTEGER h, Platform_FileIdentity *identity, SYSTEM_ADR *identity__typ);
+export INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, SYSTEM_ADR *identity__typ);
 export BOOLEAN Platform_Inaccessible (INTEGER e);
 export void Platform_MTimeAsClock (Platform_FileIdentity i, INTEGER *t, INTEGER *d);
 export INTEGER Platform_NewFile (CHAR *n, INTEGER n__len, INTEGER *h);
@@ -67,7 +67,7 @@ export INTEGER Platform_RenameFile (CHAR *o, INTEGER o__len, CHAR *n, INTEGER n_
 export BOOLEAN Platform_SameFile (Platform_FileIdentity i1, Platform_FileIdentity i2);
 export BOOLEAN Platform_SameFileTime (Platform_FileIdentity i1, Platform_FileIdentity i2);
 export INTEGER Platform_Seek (INTEGER h, LONGINT offset, INTEGER whence);
-export void Platform_SetMTime (Platform_FileIdentity *target, LONGINT *target__typ, Platform_FileIdentity source);
+export void Platform_SetMTime (Platform_FileIdentity *target, SYSTEM_ADR *target__typ, Platform_FileIdentity source);
 export INTEGER Platform_Sync (INTEGER h);
 export INTEGER Platform_System (CHAR *cmd, INTEGER cmd__len);
 static void Platform_TestLittleEndian (void);
@@ -121,7 +121,7 @@ extern void *SYSTEM_ArgVector;
 #define Platform_fstat(fd)	fstat(fd, &s)
 #define Platform_fsync(fd)	fsync(fd)
 #define Platform_ftruncate(fd, l)	ftruncate(fd, l)
-#define Platform_getcwd(cwd, cwd__len)	getcwd((char*)cwd, cwd__len)
+#define Platform_getcwd(cwd, cwd__len)	{char *dummy = getcwd((char*)cwd, cwd__len);}
 #define Platform_getenv(var, var__len)	(Platform_EnvPtr)getenv((char*)var)
 #define Platform_getpid()	(INTEGER)getpid()
 #define Platform_gettimeval()	struct timeval tv; gettimeofday(&tv, 0)
@@ -390,7 +390,7 @@ INTEGER Platform_CloseFile (INTEGER h)
 }
 
 /*----------------------------------------------------------------------------*/
-INTEGER Platform_Identify (INTEGER h, Platform_FileIdentity *identity, LONGINT *identity__typ)
+INTEGER Platform_Identify (INTEGER h, Platform_FileIdentity *identity, SYSTEM_ADR *identity__typ)
 {
 	Platform_structstats();
 	if (Platform_fstat(h) < 0) {
@@ -403,7 +403,7 @@ INTEGER Platform_Identify (INTEGER h, Platform_FileIdentity *identity, LONGINT *
 }
 
 /*----------------------------------------------------------------------------*/
-INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, LONGINT *identity__typ)
+INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, SYSTEM_ADR *identity__typ)
 {
 	__DUP(n, n__len);
 	Platform_structstats();
@@ -431,7 +431,7 @@ BOOLEAN Platform_SameFileTime (Platform_FileIdentity i1, Platform_FileIdentity i
 }
 
 /*----------------------------------------------------------------------------*/
-void Platform_SetMTime (Platform_FileIdentity *target, LONGINT *target__typ, Platform_FileIdentity source)
+void Platform_SetMTime (Platform_FileIdentity *target, SYSTEM_ADR *target__typ, Platform_FileIdentity source)
 {
 	(*target).mtime = source.mtime;
 }
