@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -es */
+/* Ofront+ 0.9 -s */
 
 #ifndef Kernel__h
 #define Kernel__h

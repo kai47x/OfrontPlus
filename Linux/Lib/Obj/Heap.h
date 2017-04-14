@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -exap */
+/* Ofront+ 0.9 -s */
 
 #ifndef Heap__h
 #define Heap__h

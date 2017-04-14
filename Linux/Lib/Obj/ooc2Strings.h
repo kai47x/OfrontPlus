@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -es */
+/* Ofront+ 0.9 -e */
 
 #ifndef ooc2Strings__h
 #define ooc2Strings__h
