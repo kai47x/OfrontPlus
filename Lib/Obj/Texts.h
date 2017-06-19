@@ -77,7 +77,7 @@ typedef
 		Texts_FontsFont fnt;
 		BYTE col, voff;
 		Texts_Elem elem;
-		char _prvt0[33];
+		char _prvt0[32];
 	} Texts_Reader;
 
 typedef
@@ -87,7 +87,7 @@ typedef
 		BYTE col, voff;
 		Texts_Elem elem;
 		LONGREAL _prvt0;
-		char _prvt1[25];
+		char _prvt1[24];
 		CHAR nextCh;
 		SHORTINT line, class;
 		INTEGER i;
