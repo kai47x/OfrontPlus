@@ -20,7 +20,7 @@ import Texts_Text Oberon_Log;
 import Oberon_ParList Oberon_Par;
 import CHAR Oberon_OptionChar;
 
-import SYSTEM_ADR *Oberon_ParRec__typ;
+import SYSTEM_ADRINT *Oberon_ParRec__typ;
 
 import void Oberon_GetClock (INTEGER *t, INTEGER *d);
 import void Oberon_GetSelection (Texts_Text *text, INTEGER *beg, INTEGER *end, INTEGER *time);
