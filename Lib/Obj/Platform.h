@@ -75,7 +75,7 @@ import INTEGER Platform_Write (Platform_FileHandle h, Platform_ADR p, INTEGER l)
 import BOOLEAN Platform_getEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER val__len);
 import void *Platform__init(void);
 
-#define Platform_InvalidHandleValue()	((Platform_FileHandle)(SYSTEM_ADR)-1)
+#define Platform_InvalidHandleValue()	((Platform_FileHandle)(SYSTEM_ADRINT)-1)
 #define Platform_ToBYTE(s)	((BYTE)(s))
 #define Platform_ToINT(l)	((INTEGER)(l))
 #define Platform_ToSHORT(i)	((SHORTINT)(i))
