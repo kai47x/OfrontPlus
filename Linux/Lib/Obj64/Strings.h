@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 - */
+/* Ofront+ 0.9 -s */
 
 #ifndef Strings__h
 #define Strings__h

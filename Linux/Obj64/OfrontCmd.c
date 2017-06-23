@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -m */
+/* Ofront+ 0.9 -e */
 #include "SYSTEM.h"
 #include "Heap.h"
 #include "Kernel.h"

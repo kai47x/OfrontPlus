@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 - */
+/* Ofront+ 0.9 -e */
 #include "SYSTEM.h"
 #include "OfrontOPM.h"
 #include "OfrontOPS.h"
@@ -568,7 +568,7 @@ void OfrontOPB_MOp (SHORTINT op, OfrontOPT_Node *x)
 				if (__IN(f, 0x03f2)) {
 					if (z->class == 7) {
 						if (__IN(f, 0x72)) {
-							if (z->conval->intval == (-9223372036854775807-1)) {
+							if (z->conval->intval == (-2147483647-1)) {
 								OfrontOPB_err(203);
 							} else {
 								z->conval->intval = -z->conval->intval;
@@ -591,7 +591,7 @@ void OfrontOPB_MOp (SHORTINT op, OfrontOPT_Node *x)
 				if (__IN(f, 0x01f2)) {
 					if (z->class == 7) {
 						if (__IN(f, 0x72)) {
-							if (z->conval->intval == (-9223372036854775807-1)) {
+							if (z->conval->intval == (-2147483647-1)) {
 								OfrontOPB_err(203);
 							} else {
 								z->conval->intval = __ABS(z->conval->intval);
@@ -977,7 +977,7 @@ static void OfrontOPB_ConstOp (INTEGER op, OfrontOPT_Node x, OfrontOPT_Node y)
 			if (__IN(f, 0x72)) {
 				xv = xval->intval;
 				yv = yval->intval;
-				if (((((xv == 0 || yv == 0) || (xv > 0 && yv > 0) && yv <= __DIV(9223372036854775807, xv)) || (xv > 0 && yv < 0) && yv >= __DIV((-9223372036854775807-1), xv)) || (xv < 0 && yv > 0) && xv >= __DIV((-9223372036854775807-1), yv)) || (((xv < 0 && yv < 0) && xv != (-9223372036854775807-1)) && yv != (-9223372036854775807-1)) && -xv <= __DIV(9223372036854775807, -yv)) {
+				if (((((xv == 0 || yv == 0) || (xv > 0 && yv > 0) && yv <= __DIV(2147483647, xv)) || (xv > 0 && yv < 0) && yv >= __DIV((-2147483647-1), xv)) || (xv < 0 && yv > 0) && xv >= __DIV((-2147483647-1), yv)) || (((xv < 0 && yv < 0) && xv != (-2147483647-1)) && yv != (-2147483647-1)) && -xv <= __DIV(2147483647, -yv)) {
 					xval->intval = xv * yv;
 					OfrontOPB_SetIntType(x);
 				} else {
@@ -1054,8 +1054,8 @@ static void OfrontOPB_ConstOp (INTEGER op, OfrontOPT_Node x, OfrontOPT_Node y)
 			break;
 		case 6: 
 			if (__IN(f, 0x72)) {
-				temp = yval->intval >= 0 && xval->intval <= 9223372036854775807 - yval->intval;
-				if (temp || yval->intval < 0 && xval->intval >= (-9223372036854775807-1) - yval->intval) {
+				temp = yval->intval >= 0 && xval->intval <= 2147483647 - yval->intval;
+				if (temp || yval->intval < 0 && xval->intval >= (-2147483647-1) - yval->intval) {
 					xval->intval += yval->intval;
 					OfrontOPB_SetIntType(x);
 				} else {
@@ -1077,7 +1077,7 @@ static void OfrontOPB_ConstOp (INTEGER op, OfrontOPT_Node x, OfrontOPT_Node y)
 			break;
 		case 7: 
 			if (__IN(f, 0x72)) {
-				if (yval->intval >= 0 && xval->intval >= (-9223372036854775807-1) + yval->intval || yval->intval < 0 && xval->intval <= 9223372036854775807 + yval->intval) {
+				if (yval->intval >= 0 && xval->intval >= (-2147483647-1) + yval->intval || yval->intval < 0 && xval->intval <= 2147483647 + yval->intval) {
 					xval->intval -= yval->intval;
 					OfrontOPB_SetIntType(x);
 				} else {
@@ -1175,7 +1175,7 @@ static void OfrontOPB_Convert (OfrontOPT_Node *x, OfrontOPT_Struct typ)
 				OfrontOPB_CheckRealType(g, 203, (*x)->conval);
 			} else {
 				r = (*x)->conval->realval;
-				if (r <  -9.22337203685478e+018 || r >   9.22337203685478e+018) {
+				if (r <  -2.14748364800000e+009 || r >   2.14748364700000e+009) {
 					OfrontOPB_err(203);
 					r = (LONGREAL)1;
 				}

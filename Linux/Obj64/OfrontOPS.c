@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 - */
+/* Ofront+ 0.9 -e */
 #include "SYSTEM.h"
 #include "OfrontOPM.h"
 
@@ -194,7 +194,7 @@ static void OfrontOPS_Number (void)
 				while (i < n) {
 					d = Ord__7(dig[__X(i, 24)], 0);
 					i += 1;
-					if (OfrontOPS_intval <= __DIV(9223372036854775807 - (LONGINT)d, 10)) {
+					if (OfrontOPS_intval <= (LONGINT)__DIV(2147483647 - d, 10)) {
 						OfrontOPS_intval = OfrontOPS_intval * 10 + (LONGINT)d;
 					} else {
 						OfrontOPS_err(203);

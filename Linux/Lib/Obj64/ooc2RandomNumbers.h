@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 - */
+/* Ofront+ 0.9 -e */
 
 #ifndef ooc2RandomNumbers__h
 #define ooc2RandomNumbers__h

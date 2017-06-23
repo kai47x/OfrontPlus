@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 - */
+/* Ofront+ 0.9 -s */
 #include "SYSTEM.h"
 #include "Args.h"
 #include "Console.h"

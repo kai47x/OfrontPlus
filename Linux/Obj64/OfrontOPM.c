@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 - */
+/* Ofront+ 0.9 -e */
 #include "SYSTEM.h"
 #include "Args.h"
 #include "Console.h"
@@ -788,7 +788,7 @@ void OfrontOPM_WriteInt (LONGINT i)
 	CHAR s[20];
 	LONGINT i1;
 	INTEGER k;
-	if (i == (-2147483647-1) || i == (-9223372036854775807-1)) {
+	if (i == (-2147483647-1) || i == (-2147483647-1)) {
 		OfrontOPM_Write('(');
 		OfrontOPM_WriteInt(i + 1);
 		OfrontOPM_WriteString((CHAR*)"-1)", 4);

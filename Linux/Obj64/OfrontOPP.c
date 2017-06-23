@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 - */
+/* Ofront+ 0.9 -e */
 #include "SYSTEM.h"
 #include "OfrontOPB.h"
 #include "OfrontOPM.h"

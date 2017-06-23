@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 - */
+/* Ofront+ 0.9 -s */
 #include "SYSTEM.h"
 
 typedef
@@ -217,7 +217,7 @@ void Platform_OSFree (Platform_ADR address)
 /*----------------------------------------------------------------------------*/
 BOOLEAN Platform_getEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER val__len)
 {
-	Platform_EnvPtr p = NIL;
+	Platform_EnvPtr p;
 	__DUP(var, var__len);
 	p = Platform_getenv(var, var__len);
 	if (p != NIL) {
@@ -240,10 +240,10 @@ void Platform_GetEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER val__len)
 /*----------------------------------------------------------------------------*/
 void Platform_GetArg (INTEGER n, CHAR *val, INTEGER val__len)
 {
-	Platform_ArgVec av = NIL;
+	Platform_ArgVec av;
 	if (n < Platform_ArgCount()) {
 		av = Platform_ArgVector();
-		__COPY(*(*av)[__X(n, 1024)], val, val__len);
+		__COPY(*(*av)[n], val, val__len);
 	}
 }
 
@@ -259,11 +259,11 @@ void Platform_GetIntArg (INTEGER n, INTEGER *val)
 		i = 1;
 	}
 	k = 0;
-	d = (SHORTINT)s[__X(i, 64)] - 48;
+	d = (SHORTINT)s[i] - 48;
 	while (d >= 0 && d <= 9) {
 		k = k * 10 + d;
 		i += 1;
-		d = (SHORTINT)s[__X(i, 64)] - 48;
+		d = (SHORTINT)s[i] - 48;
 	}
 	if (s[0] == '-') {
 		k = -k;
