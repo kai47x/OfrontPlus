@@ -74,10 +74,10 @@ import OfrontOPT_Object OfrontOPT_GlbMod[64];
 import OfrontOPS_Name OfrontOPT_SelfName;
 import BOOLEAN OfrontOPT_SYSimported;
 
-import SYSTEM_ADR *OfrontOPT_ConstDesc__typ;
-import SYSTEM_ADR *OfrontOPT_ObjDesc__typ;
-import SYSTEM_ADR *OfrontOPT_StrDesc__typ;
-import SYSTEM_ADR *OfrontOPT_NodeDesc__typ;
+import SYSTEM_ADRINT *OfrontOPT_ConstDesc__typ;
+import SYSTEM_ADRINT *OfrontOPT_ObjDesc__typ;
+import SYSTEM_ADRINT *OfrontOPT_StrDesc__typ;
+import SYSTEM_ADRINT *OfrontOPT_NodeDesc__typ;
 
 import void OfrontOPT_Close (void);
 import void OfrontOPT_CloseScope (void);

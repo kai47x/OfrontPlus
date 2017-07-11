@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -es */
+/* Ofront+ 0.9 -e */
 
 #ifndef OfrontOPT__h
 #define OfrontOPT__h
@@ -59,7 +59,7 @@ typedef
 		INTEGER ref, sysflag;
 		LONGINT n, size, align, txtpos;
 		BOOLEAN allocated, pbused, pvused;
-		char _prvt0[8];
+		char _prvt0[12];
 		LONGINT pbfp, pvfp;
 		OfrontOPT_Struct BaseTyp;
 		OfrontOPT_Object link, strobj;

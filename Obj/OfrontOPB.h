@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -e */
+/* Ofront+ 0.9 -s */
 
 #ifndef OfrontOPB__h
 #define OfrontOPB__h

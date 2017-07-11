@@ -51,8 +51,8 @@ import LONGINT Heap_heap;
 import LONGINT Heap_heapsize, Heap_heapMinExpand;
 import SHORTINT Heap_FileCount;
 
-import SYSTEM_ADR *Heap_ModuleDesc__typ;
-import SYSTEM_ADR *Heap_CmdDesc__typ;
+import SYSTEM_ADRINT *Heap_ModuleDesc__typ;
+import SYSTEM_ADRINT *Heap_CmdDesc__typ;
 
 import void Heap_FINALL (void);
 import INTEGER Heap_FreeModule (CHAR *name, INTEGER name__len);

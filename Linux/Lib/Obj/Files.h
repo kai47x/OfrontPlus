@@ -10,16 +10,16 @@ typedef
 
 typedef
 	struct Files_FileDesc {
-		char _prvt0[216];
+		char _prvt0[220];
 		INTEGER fd;
-		char _prvt1[32];
+		char _prvt1[40];
 	} Files_FileDesc;
 
 typedef
 	struct Files_Rider {
 		INTEGER res;
 		BOOLEAN eof;
-		char _prvt0[15];
+		char _prvt0[19];
 	} Files_Rider;
 
 

@@ -15,7 +15,7 @@ typedef
 
 
 
-import SYSTEM_ADR *ooc2ConvTypes_ScanDesc__typ;
+import SYSTEM_ADRINT *ooc2ConvTypes_ScanDesc__typ;
 
 import void *ooc2ConvTypes__init(void);
 

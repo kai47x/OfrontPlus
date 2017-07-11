@@ -21,8 +21,8 @@ import void Kernel_Halt (INTEGER code);
 import void Kernel_SetHalt (Kernel_HaltProcedure p);
 import void *Kernel__init(void);
 
-#define Kernel_SetBadInstructionHandler(h)	SystemSetBadInstructionHandler((SYSTEM_ADR)h)
-#define Kernel_SetInterruptHandler(h)	SystemSetInterruptHandler((SYSTEM_ADR)h)
-#define Kernel_SetQuitHandler(h)	SystemSetQuitHandler((SYSTEM_ADR)h)
+#define Kernel_SetBadInstructionHandler(h)	SystemSetBadInstructionHandler((SYSTEM_ADRINT)h)
+#define Kernel_SetInterruptHandler(h)	SystemSetInterruptHandler((SYSTEM_ADRINT)h)
+#define Kernel_SetQuitHandler(h)	SystemSetQuitHandler((SYSTEM_ADRINT)h)
 
 #endif

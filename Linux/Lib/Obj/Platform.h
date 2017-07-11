@@ -17,7 +17,7 @@ typedef
 typedef
 	struct Platform_FileIdentity {
 		INTEGER _prvt0;
-		char _prvt1[8];
+		char _prvt1[12];
 	} Platform_FileIdentity;
 
 
@@ -32,7 +32,7 @@ import SYSTEM_ADRINT *Platform_FileIdentity__typ;
 import BOOLEAN Platform_Absent (INTEGER e);
 import INTEGER Platform_ArgPos (CHAR *s, INTEGER s__len);
 import INTEGER Platform_Chdir (CHAR *n, INTEGER n__len);
-import INTEGER Platform_CloseFile (INTEGER h);
+import INTEGER Platform_CloseFile (INTEGER handle);
 import BOOLEAN Platform_ConnectionFailed (INTEGER e);
 import void Platform_Delay (INTEGER ms);
 import INTEGER Platform_DeleteFile (CHAR *n, INTEGER n__len);
@@ -48,12 +48,12 @@ import INTEGER Platform_Identify (INTEGER h, Platform_FileIdentity *identity, SY
 import INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, SYSTEM_ADRINT *identity__typ);
 import BOOLEAN Platform_Inaccessible (INTEGER e);
 import void Platform_MTimeAsClock (Platform_FileIdentity i, INTEGER *t, INTEGER *d);
-import INTEGER Platform_NewFile (CHAR *n, INTEGER n__len, INTEGER *h);
+import INTEGER Platform_NewFile (CHAR *name, INTEGER name__len, INTEGER *h);
 import BOOLEAN Platform_NoSuchDirectory (INTEGER e);
 import Platform_ADR Platform_OSAllocate (INTEGER size);
 import void Platform_OSFree (Platform_ADR address);
-import INTEGER Platform_OldRO (CHAR *n, INTEGER n__len, INTEGER *h);
-import INTEGER Platform_OldRW (CHAR *n, INTEGER n__len, INTEGER *h);
+import INTEGER Platform_OldRO (CHAR *name, INTEGER name__len, INTEGER *h);
+import INTEGER Platform_OldRW (CHAR *name, INTEGER name__len, INTEGER *h);
 import INTEGER Platform_Read (INTEGER h, Platform_ADR p, INTEGER l, INTEGER *n);
 import INTEGER Platform_ReadBuf (INTEGER h, BYTE *b, INTEGER b__len, INTEGER *n);
 import INTEGER Platform_RenameFile (CHAR *o, INTEGER o__len, CHAR *n, INTEGER n__len);
@@ -66,7 +66,7 @@ import INTEGER Platform_System (CHAR *cmd, INTEGER cmd__len);
 import INTEGER Platform_Time (void);
 import BOOLEAN Platform_TimedOut (INTEGER e);
 import BOOLEAN Platform_TooManyFiles (INTEGER e);
-import INTEGER Platform_TruncateFile (INTEGER h, INTEGER l);
+import INTEGER Platform_TruncateFile (INTEGER h, LONGINT limit);
 import INTEGER Platform_Write (INTEGER h, Platform_ADR p, INTEGER l);
 import BOOLEAN Platform_getEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER val__len);
 import void *Platform__init(void);
