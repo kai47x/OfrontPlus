@@ -53,6 +53,7 @@ import void Platform_GetIntArg (INTEGER n, INTEGER *val);
 import INTEGER Platform_Identify (Platform_FileHandle h, Platform_FileIdentity *identity, SYSTEM_ADRINT *identity__typ);
 import INTEGER Platform_IdentifyByName (CHAR *n, INTEGER n__len, Platform_FileIdentity *identity, SYSTEM_ADRINT *identity__typ);
 import BOOLEAN Platform_Inaccessible (INTEGER e);
+import BOOLEAN Platform_IsConsole (Platform_FileHandle h);
 import void Platform_MTimeAsClock (Platform_FileIdentity i, INTEGER *t, INTEGER *d);
 import INTEGER Platform_NewFile (CHAR *n, INTEGER n__len, Platform_FileHandle *h);
 import BOOLEAN Platform_NoSuchDirectory (INTEGER e);
@@ -65,7 +66,7 @@ import INTEGER Platform_ReadBuf (Platform_FileHandle h, BYTE *b, INTEGER b__len,
 import INTEGER Platform_RenameFile (CHAR *oldname, INTEGER oldname__len, CHAR *newname, INTEGER newname__len);
 import BOOLEAN Platform_SameFile (Platform_FileIdentity i1, Platform_FileIdentity i2);
 import BOOLEAN Platform_SameFileTime (Platform_FileIdentity i1, Platform_FileIdentity i2);
-import INTEGER Platform_Seek (Platform_FileHandle h, LONGINT o, INTEGER r);
+import INTEGER Platform_Seek (Platform_FileHandle h, LONGINT offset, INTEGER r);
 import void Platform_SetMTime (Platform_FileIdentity *target, SYSTEM_ADRINT *target__typ, Platform_FileIdentity source);
 import INTEGER Platform_Sync (Platform_FileHandle h);
 import INTEGER Platform_System (CHAR *cmd, INTEGER cmd__len);
