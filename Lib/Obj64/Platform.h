@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -s */
+/* Ofront+ 1.0 -s */
 
 #ifndef Platform__h
 #define Platform__h
@@ -63,7 +63,7 @@ import INTEGER Platform_OldRO (CHAR *n, INTEGER n__len, Platform_FileHandle *h);
 import INTEGER Platform_OldRW (CHAR *n, INTEGER n__len, Platform_FileHandle *h);
 import INTEGER Platform_Read (Platform_FileHandle h, Platform_ADR p, INTEGER l, INTEGER *n);
 import INTEGER Platform_ReadBuf (Platform_FileHandle h, BYTE *b, INTEGER b__len, INTEGER *n);
-import INTEGER Platform_RenameFile (CHAR *oldname, INTEGER oldname__len, CHAR *newname, INTEGER newname__len);
+import INTEGER Platform_RenameFile (CHAR *src, INTEGER src__len, CHAR *dest, INTEGER dest__len);
 import BOOLEAN Platform_SameFile (Platform_FileIdentity i1, Platform_FileIdentity i2);
 import BOOLEAN Platform_SameFileTime (Platform_FileIdentity i1, Platform_FileIdentity i2);
 import INTEGER Platform_Seek (Platform_FileHandle h, LONGINT offset, INTEGER r);
