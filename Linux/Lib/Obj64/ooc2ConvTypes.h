@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -e */
+/* Ofront+ 1.0 -e */
 
 #ifndef ooc2ConvTypes__h
 #define ooc2ConvTypes__h
