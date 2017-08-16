@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -e */
+/* Ofront+ 1.0 -es */
 
 #ifndef OfrontOPT__h
 #define OfrontOPT__h
