@@ -4,7 +4,6 @@
 #define Files__h
 
 #include "SYSTEM.h"
-#include "Platform.h"
 
 typedef
 	struct Files_FileDesc *Files_File;
@@ -13,7 +12,7 @@ typedef
 	struct Files_FileDesc {
 		LONGINT _prvt0;
 		char _prvt1[216];
-		Platform_FileHandle fd;
+		INTEGER fd;
 		char _prvt2[44];
 	} Files_FileDesc;
 
