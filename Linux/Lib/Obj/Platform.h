@@ -1,12 +1,9 @@
-/* Ofront+ 1.0 -s */
+/* Ofront+ 0.9 -s */
 
 #ifndef Platform__h
 #define Platform__h
 
 #include "SYSTEM.h"
-
-typedef
-	CHAR (*Platform_ADR)[1];
 
 typedef
 	CHAR (*Platform_ArgPtr)[1024];
@@ -53,11 +50,11 @@ import BOOLEAN Platform_IsConsole (INTEGER h);
 import void Platform_MTimeAsClock (Platform_FileIdentity i, INTEGER *t, INTEGER *d);
 import INTEGER Platform_NewFile (CHAR *name, INTEGER name__len, INTEGER *h);
 import BOOLEAN Platform_NoSuchDirectory (INTEGER e);
-import Platform_ADR Platform_OSAllocate (INTEGER size);
-import void Platform_OSFree (Platform_ADR address);
+import INTEGER Platform_OSAllocate (INTEGER size);
+import void Platform_OSFree (INTEGER address);
 import INTEGER Platform_OldRO (CHAR *name, INTEGER name__len, INTEGER *h);
 import INTEGER Platform_OldRW (CHAR *name, INTEGER name__len, INTEGER *h);
-import INTEGER Platform_Read (INTEGER h, Platform_ADR p, INTEGER l, INTEGER *n);
+import INTEGER Platform_Read (INTEGER h, INTEGER p, INTEGER l, INTEGER *n);
 import INTEGER Platform_ReadBuf (INTEGER h, BYTE *b, INTEGER b__len, INTEGER *n);
 import INTEGER Platform_RenameFile (CHAR *oldname, INTEGER oldname__len, CHAR *newname, INTEGER newname__len);
 import BOOLEAN Platform_SameFile (Platform_FileIdentity i1, Platform_FileIdentity i2);
@@ -70,7 +67,7 @@ import INTEGER Platform_Time (void);
 import BOOLEAN Platform_TimedOut (INTEGER e);
 import BOOLEAN Platform_TooManyFiles (INTEGER e);
 import INTEGER Platform_TruncateFile (INTEGER h, LONGINT limit);
-import INTEGER Platform_Write (INTEGER h, Platform_ADR p, INTEGER l);
+import INTEGER Platform_Write (INTEGER h, INTEGER p, INTEGER l);
 import BOOLEAN Platform_getEnv (CHAR *var, INTEGER var__len, CHAR *val, INTEGER val__len);
 import void *Platform__init(void);
 
