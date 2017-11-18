@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -e */
+/* Ofront+ 0.9 -e */
 
 #ifndef ooc2Ascii__h
 #define ooc2Ascii__h
