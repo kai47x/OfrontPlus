@@ -1,4 +1,4 @@
-/* Ofront+ 0.9 -s */
+/* Ofront+ 1.0 -s */
 
 #ifndef Texts__h
 #define Texts__h
