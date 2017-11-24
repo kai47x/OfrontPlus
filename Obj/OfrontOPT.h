@@ -15,7 +15,8 @@ typedef
 typedef
 	struct OfrontOPT_ConstDesc {
 		OfrontOPT_ConstExt ext;
-		LONGINT intval, intval2;
+		LONGINT intval;
+		INTEGER intval2;
 		SET setval;
 		LONGREAL realval;
 	} OfrontOPT_ConstDesc;
@@ -32,7 +33,7 @@ typedef
 typedef
 	struct OfrontOPT_NodeDesc {
 		OfrontOPT_Node left, right, link;
-		SHORTINT class, subcl;
+		BYTE class, subcl;
 		BOOLEAN readonly;
 		OfrontOPT_Struct typ;
 		OfrontOPT_Object obj;
@@ -44,23 +45,23 @@ typedef
 		OfrontOPT_Object left, right, link, scope;
 		OfrontOPS_Name name;
 		BOOLEAN leaf;
-		SHORTINT mode, mnolev, vis, history;
+		BYTE mode, mnolev, vis, history;
 		BOOLEAN used, fpdone;
-		LONGINT fprint;
+		INTEGER fprint;
 		OfrontOPT_Struct typ;
 		OfrontOPT_Const conval;
-		LONGINT adr, linkadr;
-		INTEGER x;
+		INTEGER adr, linkadr;
+		SHORTINT x;
 	} OfrontOPT_ObjDesc;
 
 typedef
 	struct OfrontOPT_StrDesc {
-		SHORTINT form, comp, mno, extlev;
-		INTEGER ref, sysflag;
-		LONGINT n, size, align, txtpos;
+		BYTE form, comp, mno, extlev;
+		SHORTINT ref, sysflag;
+		INTEGER n, size, align, txtpos;
 		BOOLEAN allocated, pbused, pvused;
 		char _prvt0[8];
-		LONGINT pbfp, pvfp;
+		INTEGER pbfp, pvfp;
 		OfrontOPT_Struct BaseTyp;
 		OfrontOPT_Object link, strobj;
 	} OfrontOPT_StrDesc;
@@ -69,7 +70,7 @@ typedef
 import void (*OfrontOPT_typSize)(OfrontOPT_Struct);
 import OfrontOPT_Object OfrontOPT_topScope;
 import OfrontOPT_Struct OfrontOPT_undftyp, OfrontOPT_bytetyp, OfrontOPT_booltyp, OfrontOPT_chartyp, OfrontOPT_sinttyp, OfrontOPT_inttyp, OfrontOPT_linttyp, OfrontOPT_realtyp, OfrontOPT_lrltyp, OfrontOPT_settyp, OfrontOPT_stringtyp, OfrontOPT_niltyp, OfrontOPT_notyp, OfrontOPT_sysptrtyp;
-import SHORTINT OfrontOPT_nofGmod;
+import BYTE OfrontOPT_nofGmod;
 import OfrontOPT_Object OfrontOPT_GlbMod[64];
 import OfrontOPS_Name OfrontOPT_SelfName;
 import BOOLEAN OfrontOPT_SYSimported;
@@ -82,7 +83,7 @@ import SYSTEM_ADRINT *OfrontOPT_NodeDesc__typ;
 import void OfrontOPT_Close (void);
 import void OfrontOPT_CloseScope (void);
 import void OfrontOPT_Export (BOOLEAN *ext, BOOLEAN *new);
-import void OfrontOPT_FPrintErr (OfrontOPT_Object obj, INTEGER errno);
+import void OfrontOPT_FPrintErr (OfrontOPT_Object obj, SHORTINT errno);
 import void OfrontOPT_FPrintObj (OfrontOPT_Object obj);
 import void OfrontOPT_FPrintStr (OfrontOPT_Struct typ);
 import void OfrontOPT_Find (OfrontOPT_Object *res);
@@ -95,10 +96,10 @@ import void OfrontOPT_Insert (OfrontOPS_Name name, OfrontOPT_Object *obj);
 import void OfrontOPT_InsertImport (OfrontOPT_Object obj, OfrontOPT_Object *root, OfrontOPT_Object *old);
 import OfrontOPT_Const OfrontOPT_NewConst (void);
 import OfrontOPT_ConstExt OfrontOPT_NewExt (void);
-import OfrontOPT_Node OfrontOPT_NewNode (SHORTINT class);
+import OfrontOPT_Node OfrontOPT_NewNode (BYTE class);
 import OfrontOPT_Object OfrontOPT_NewObj (void);
-import OfrontOPT_Struct OfrontOPT_NewStr (SHORTINT form, SHORTINT comp);
-import void OfrontOPT_OpenScope (SHORTINT level, OfrontOPT_Object owner);
+import OfrontOPT_Struct OfrontOPT_NewStr (BYTE form, BYTE comp);
+import void OfrontOPT_OpenScope (BYTE level, OfrontOPT_Object owner);
 import void *OfrontOPT__init(void);
 
 
