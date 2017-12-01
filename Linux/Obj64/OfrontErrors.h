@@ -8,7 +8,7 @@
 
 
 
-import void OfrontErrors_LogErrMsg (INTEGER n);
+import void OfrontErrors_LogErrMsg (SHORTINT n);
 import void *OfrontErrors__init(void);
 
 
