@@ -1,0 +1,214 @@
+/* Ofront+ 1.0 -s */
+
+#ifndef SDL2__h
+#define SDL2__h
+
+#include "SYSTEM.h"
+
+typedef
+	struct SDL2_DisplayMode {
+		INTEGER format, w, h, refreshRate;
+		char _prvt0[4];
+	} SDL2_DisplayMode;
+
+typedef
+	struct SDL2_Event {
+		INTEGER type;
+		char _prvt0[124];
+	} SDL2_Event;
+
+typedef
+	BOOLEAN (*SDL2_KeyArray)[1024];
+
+typedef
+	struct SDL2_KeyboardEventDesc *SDL2_KeyboardEvent;
+
+typedef
+	struct SDL2_Keysym {
+		INTEGER scancode, sym;
+		SHORTINT mod;
+	} SDL2_Keysym;
+
+typedef
+	struct SDL2_KeyboardEventDesc {
+		INTEGER type, timestamp, windowID;
+		SHORTINT state, repeat;
+		SDL2_Keysym keysym;
+		char _prvt0[100];
+	} SDL2_KeyboardEventDesc;
+
+typedef
+	struct SDL2_MouseButtonEventDesc *SDL2_MouseButtonEvent;
+
+typedef
+	struct SDL2_MouseButtonEventDesc {
+		INTEGER type, timestamp, windowID, which;
+		BYTE button, state, clicks;
+		INTEGER x, y;
+	} SDL2_MouseButtonEventDesc;
+
+typedef
+	struct SDL2_MouseMotionEventDesc *SDL2_MouseMotionEvent;
+
+typedef
+	struct SDL2_MouseMotionEventDesc {
+		INTEGER type, timestamp, windowID, which, state, x, y, xRel, yRel;
+	} SDL2_MouseMotionEventDesc;
+
+typedef
+	struct SDL2_MouseWheelEventDesc *SDL2_MouseWheelEvent;
+
+typedef
+	struct SDL2_MouseWheelEventDesc {
+		INTEGER type, timestamp, windowID, which, x, y, direction;
+	} SDL2_MouseWheelEventDesc;
+
+typedef
+	struct SDL2_PaletteDesc *SDL2_Palette;
+
+typedef
+	struct SDL2_PaletteDesc {
+		INTEGER _prvt0;
+		char _prvt1[12];
+	} SDL2_PaletteDesc;
+
+typedef
+	struct SDL2_PixelFormatDesc *SDL2_PixelFormat;
+
+typedef
+	struct SDL2_PixelFormatDesc {
+		INTEGER format;
+		SDL2_Palette palette;
+		SHORTINT bitsPerPixel, bytesPerPixel;
+		INTEGER rMask, gMask, aMask;
+		char _prvt0[16];
+	} SDL2_PixelFormatDesc;
+
+typedef
+	struct SDL2_Rect {
+		INTEGER x, y, w, h;
+	} SDL2_Rect;
+
+typedef
+	struct SDL2_SurfaceDesc *SDL2_Surface;
+
+typedef
+	struct SDL2_SurfaceDesc {
+		char _prvt0[4];
+		SDL2_PixelFormat format;
+		INTEGER w, h, pitch;
+		SYSTEM_PTR pixels, userData;
+		char _prvt1[8];
+		SDL2_Rect clipRect;
+		char _prvt2[4];
+		INTEGER refCount;
+	} SDL2_SurfaceDesc;
+
+typedef
+	struct SDL2_TextEditingEventDesc *SDL2_TextEditingEvent;
+
+typedef
+	struct SDL2_TextEditingEventDesc {
+		INTEGER type, timestamp, windowID;
+		CHAR text[32];
+		INTEGER start, length;
+	} SDL2_TextEditingEventDesc;
+
+typedef
+	struct SDL2_TextInputEventDesc *SDL2_TextInputEvent;
+
+typedef
+	struct SDL2_TextInputEventDesc {
+		INTEGER type, timestamp, windowID;
+		CHAR text[32];
+	} SDL2_TextInputEventDesc;
+
+typedef
+	struct SDL2_WindowEventDesc *SDL2_WindowEvent;
+
+typedef
+	struct SDL2_WindowEventDesc {
+		INTEGER type, timestamp, windowID;
+		SHORTINT event;
+		INTEGER data1, data2;
+	} SDL2_WindowEventDesc;
+
+
+
+import SYSTEM_ADRINT *SDL2_WindowEventDesc__typ;
+import SYSTEM_ADRINT *SDL2_Keysym__typ;
+import SYSTEM_ADRINT *SDL2_KeyboardEventDesc__typ;
+import SYSTEM_ADRINT *SDL2_MouseMotionEventDesc__typ;
+import SYSTEM_ADRINT *SDL2_MouseButtonEventDesc__typ;
+import SYSTEM_ADRINT *SDL2_MouseWheelEventDesc__typ;
+import SYSTEM_ADRINT *SDL2_TextEditingEventDesc__typ;
+import SYSTEM_ADRINT *SDL2_TextInputEventDesc__typ;
+import SYSTEM_ADRINT *SDL2_Event__typ;
+import SYSTEM_ADRINT *SDL2_Rect__typ;
+import SYSTEM_ADRINT *SDL2_PaletteDesc__typ;
+import SYSTEM_ADRINT *SDL2_DisplayMode__typ;
+import SYSTEM_ADRINT *SDL2_PixelFormatDesc__typ;
+import SYSTEM_ADRINT *SDL2_SurfaceDesc__typ;
+
+import void *SDL2__init(void);
+
+#define SDL2_BlitScaled(src, srcRect, srcRect__typ, dst, dstRect, dstRect__typ)	SDL_UpperBlitScaled(src, srcRect, dst, dstRect)
+#define SDL2_BlitSurface(src, srcRect, srcRect__typ, dst, dstRect, dstRect__typ)	SDL_UpperBlit(src, srcRect, dst, dstRect)
+#define SDL2_BlitSurfaceNil(src, dst, dstRect, dstRect__typ)	SDL_UpperBlit(src, (void *)0, dst, dstRect)
+#define SDL2_ConvertSurface(src, fmt, flags)	(void *)SDL_ConvertSurface(src, fmt, flags)
+#define SDL2_CreateRGBSurface(flags, w, h, depth, rMask, gMask, bMask, aMask)	(void *)SDL_CreateRGBSurface(flags, w, h, depth, rMask, gMask, bMask, aMask)
+#define SDL2_CreateRenderer(win, index, flags)	(void *)SDL_CreateRenderer(win, index, flags)
+#define SDL2_CreateTextureFromSurface(renderer, surface)	(void *)SDL_CreateTextureFromSurface(renderer, surface)
+#define SDL2_CreateWindow(title, title__len, x, y, w, h, flags)	(void *)SDL_CreateWindow(title, x, y, w, h, flags)
+#define SDL2_Delay(ms)	SDL_Delay(ms)
+#define SDL2_DestroyTexture(texture)	SDL_DestroyTexture(texture)
+#define SDL2_FillRect(dst, rect, rect__typ, color)	SDL_FillRect(dst, rect, color)
+#define SDL2_FillRectNil(dst, color)	SDL_FillRect(dst, (void *)0, color)
+#define SDL2_FreeSurface(surface)	SDL_FreeSurface(surface)
+#define SDL2_GetDesktopDisplayMode(displayIndex, mode, mode__typ)	SDL_GetDesktopDisplayMode(displayIndex, mode)
+#define SDL2_GetError()	SDL_GetError()
+#define SDL2_GetKeyboardState(numKeys)	SDL_GetKeyboardState(numKeys)
+#define SDL2_GetKeyboardStateNil()	(void *)SDL_GetKeyboardState((void *)0)
+#define SDL2_GetMouseState(x, y)	SDL_GetMouseState(x, y)
+#define SDL2_GetTicks()	SDL_GetTicks()
+#define SDL2_GetWindowFlags(window)	SDL_GetWindowFlags(window)
+#define SDL2_GetWindowSize(window, w, h)	SDL_GetWindowSize(window, w, h)
+#define SDL2_HasEvent(type)	SDL_HasEvent(type)
+#define SDL2_HasEvents(minType, maxType)	SDL_HasEvents(minType, maxType)
+#define SDL2_ImgInit(flags)	IMG_Init(flags)
+#define SDL2_ImgLoad(file, file__len)	(void *)IMG_Load(file)
+#define SDL2_ImgQuit()	IMG_Quit()
+#define SDL2_Init(flags)	SDL_Init(flags)
+#define SDL2_LoadBmpRW(src, freeSrc)	(void *)SDL_LoadBMP_RW(src, freeSrc)
+#define SDL2_LockSurface(surface)	SDL_LockSurface(surface)
+#define SDL2_MapRGB(format, r, g, b)	SDL_MapRGB(format, r, g, b)
+#define SDL2_PeepEvents(events, events__len, numevents, action, minType, maxType)	SDL_PeepEvents(events, numevents, action, minType, maxType)
+#define SDL2_PollEvent(e, e__typ)	SDL_PollEvent(e)
+#define SDL2_PumpEvents()	SDL_PumpEvents()
+#define SDL2_Quit()	SDL_Quit()
+#define SDL2_RWFromFile(fname, fname__len, mode, mode__len)	SDL_RWFromFile(fname, mode)
+#define SDL2_RenderClear(renderer)	SDL_RenderClear(renderer)
+#define SDL2_RenderCopy(renderer, texture, srcRect, srcRect__typ, dstRect, dstRect__typ)	SDL_RenderCopy(renderer, texture, srcRect, dstRect)
+#define SDL2_RenderCopyNil(renderer, texture)	SDL_RenderCopy(renderer, texture, (void *)0, (void *)0)
+#define SDL2_RenderDrawLine(renderer, x1, y1, x2, y2)	SDL_RenderDrawLine(renderer, x1, y1, x2, y2)
+#define SDL2_RenderDrawPoint(renderer, x, y)	SDL_RenderDrawPoint(renderer, x, y)
+#define SDL2_RenderDrawRect(renderer, rect, rect__typ)	SDL_RenderDrawRect(renderer, rect)
+#define SDL2_RenderFillRect(renderer, rect, rect__typ)	SDL_RenderFillRect(renderer, rect)
+#define SDL2_RenderPresent(renderer)	SDL_RenderPresent(renderer)
+#define SDL2_RenderSetLogicalSize(renderer, w, h)	SDL_RenderSetLogicalSize(renderer, w, h)
+#define SDL2_SetColorKey(surface, flag, key)	SDL_SetColorKey(surface, flag, key)
+#define SDL2_SetHint(name, name__len, value, value__len)	SDL_SetHint(name, value)
+#define SDL2_SetRenderDrawBlendMode(renderer, blendMode)	SDL_SetRenderDrawBlendMode(renderer, blendMode)
+#define SDL2_SetRenderDrawColor(renderer, r, g, b, a)	SDL_SetRenderDrawColor(renderer, r, g, b, a)
+#define SDL2_SetSurfaceColorMod(surface, r, g, b)	SDL_SetSurfaceColorMod(surface, r, g, b)
+#define SDL2_SetWindowFullscreen(win, flags)	SDL_SetWindowFullscreen(win, flags)
+#define SDL2_SetWindowSize(window, w, h)	SDL_SetWindowSize(window, w, h)
+#define SDL2_SetWindowTitle(window, title, title__len)	SDL_SetWindowTitle(window, title)
+#define SDL2_ShowCursor(toggle)	SDL_ShowCursor(toggle)
+#define SDL2_StartTextInput()	SDL_StartTextInput()
+#define SDL2_StopTextInput()	SDL_StopTextInput()
+#define SDL2_UnlockSurface(surface)	SDL_UnlockSurface(surface)
+#define SDL2_WaitEvent(e, e__typ)	SDL_WaitEvent(e)
+#define SDL2_WaitEventTimeout(e, e__typ, timeout)	SDL_WaitEventTimeout(e, timeout)
+
+#endif
