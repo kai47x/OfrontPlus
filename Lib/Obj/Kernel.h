@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -s */
+/* Ofront+ 1.0 -sxtapC -48 */
 
 #ifndef Kernel__h
 #define Kernel__h

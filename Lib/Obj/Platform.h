@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -s */
+/* Ofront+ 1.0 -sxtapC -48 */
 
 #ifndef Platform__h
 #define Platform__h

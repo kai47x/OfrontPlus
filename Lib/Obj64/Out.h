@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -s */
+/* Ofront+ 1.0 -sC -88 */
 
 #ifndef Out__h
 #define Out__h

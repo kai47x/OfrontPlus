@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -e */
+/* Ofront+ 1.0 -e -88 */
 
 #ifndef OfrontErrors__h
 #define OfrontErrors__h

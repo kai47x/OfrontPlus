@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -s */
+/* Ofront+ 1.0 -sC -48 */
 
 #ifndef Math__h
 #define Math__h

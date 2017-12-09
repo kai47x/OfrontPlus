@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -s */
+/* Ofront+ 1.0 -sC -48 */
 
 #ifndef Args__h
 #define Args__h
