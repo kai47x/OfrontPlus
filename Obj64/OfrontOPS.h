@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -eC -88 */
+/* Ofront+ 1.0 -sC -88 */
 
 #ifndef OfrontOPS__h
 #define OfrontOPS__h
