@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -es */
+/* Ofront+ 1.0 -esC -88 */
 
 #ifndef OfrontOPM__h
 #define OfrontOPM__h
@@ -6,9 +6,9 @@
 #include "SYSTEM.h"
 
 
-import SHORTINT OfrontOPM_ByteSize, OfrontOPM_CharSize, OfrontOPM_BoolSize, OfrontOPM_SIntSize, OfrontOPM_IntSize, OfrontOPM_LIntSize, OfrontOPM_SetSize, OfrontOPM_RealSize, OfrontOPM_LRealSize, OfrontOPM_PointerSize, OfrontOPM_ProcSize, OfrontOPM_RecSize, OfrontOPM_ArrLenSize, OfrontOPM_CharAlign, OfrontOPM_BoolAlign, OfrontOPM_SIntAlign, OfrontOPM_IntAlign, OfrontOPM_LIntAlign, OfrontOPM_SetAlign, OfrontOPM_RealAlign, OfrontOPM_LRealAlign, OfrontOPM_PointerAlign, OfrontOPM_ProcAlign, OfrontOPM_RecAlign, OfrontOPM_ByteOrder, OfrontOPM_BitOrder, OfrontOPM_MaxSet, OfrontOPM_MaxHDig;
-import INTEGER OfrontOPM_MinSInt, OfrontOPM_MinInt, OfrontOPM_MaxSInt, OfrontOPM_MaxInt, OfrontOPM_MaxIndex;
-import LONGINT OfrontOPM_MinLInt, OfrontOPM_MaxLInt;
+import SHORTINT OfrontOPM_ByteSize, OfrontOPM_CharSize, OfrontOPM_BoolSize, OfrontOPM_SIntSize, OfrontOPM_IntSize, OfrontOPM_LIntSize, OfrontOPM_SetSize, OfrontOPM_RealSize, OfrontOPM_LRealSize, OfrontOPM_PointerSize, OfrontOPM_ProcSize, OfrontOPM_RecSize, OfrontOPM_IndexSize, OfrontOPM_CharAlign, OfrontOPM_BoolAlign, OfrontOPM_SIntAlign, OfrontOPM_IntAlign, OfrontOPM_LIntAlign, OfrontOPM_SetAlign, OfrontOPM_RealAlign, OfrontOPM_LRealAlign, OfrontOPM_PointerAlign, OfrontOPM_ProcAlign, OfrontOPM_RecAlign, OfrontOPM_ByteOrder, OfrontOPM_BitOrder, OfrontOPM_MaxSet, OfrontOPM_MaxHDig;
+import INTEGER OfrontOPM_MinSInt, OfrontOPM_MinInt, OfrontOPM_MaxSInt, OfrontOPM_MaxInt;
+import LONGINT OfrontOPM_MaxIndex, OfrontOPM_MinLInt, OfrontOPM_MaxLInt;
 import LONGREAL OfrontOPM_MinReal, OfrontOPM_MaxReal, OfrontOPM_MinLReal, OfrontOPM_MaxLReal;
 import BOOLEAN OfrontOPM_noerr;
 import INTEGER OfrontOPM_curpos;
@@ -19,6 +19,8 @@ import INTEGER OfrontOPM_pc, OfrontOPM_entno;
 import CHAR OfrontOPM_modName[32];
 import CHAR OfrontOPM_objname[64];
 import SET OfrontOPM_opt, OfrontOPM_glbopt;
+import CHAR OfrontOPM_Language;
+import SHORTINT OfrontOPM_AddressSize, OfrontOPM_Alignment;
 
 
 import void OfrontOPM_CloseFiles (void);
