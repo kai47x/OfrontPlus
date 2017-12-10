@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -s */
+/* Ofront+ 1.0 -sC -44 */
 
 #ifndef Reals__h
 #define Reals__h

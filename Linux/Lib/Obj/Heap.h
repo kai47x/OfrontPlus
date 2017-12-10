@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -s */
+/* Ofront+ 1.0 -sxapC -44 */
 
 #ifndef Heap__h
 #define Heap__h

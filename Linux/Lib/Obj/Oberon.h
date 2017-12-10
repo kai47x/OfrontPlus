@@ -1,4 +1,4 @@
-/* Ofront+ 1.0 -s */
+/* Ofront+ 1.0 -sC -44 */
 
 #ifndef Oberon__h
 #define Oberon__h
